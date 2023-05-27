@@ -38,17 +38,19 @@ class MemoCardWidget extends StatelessWidget {
             height: 50,
             child: Card(
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const SizedBox(width: 10,),
                   Container(
-                    width: 24,
-                    height: 24,
+                    width: 16,
+                    height: 16,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: color)
-                    ,),
+                      color: color),
+                    ),
+                  Expanded(child: Container()),
                   Text(title),
+                  Expanded(child: Container()),
                 ],
               ),
             ),
