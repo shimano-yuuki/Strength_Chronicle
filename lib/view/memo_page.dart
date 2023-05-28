@@ -5,19 +5,51 @@ class MemoPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center(
-        child: Column(
-          children: [
-            Text('種目',style: TextStyle(fontSize: 24),),
-            MemoCardWidget(title: 'アームカール', color: Colors.deepOrange)
-          ],
+    return DefaultTabController(
+      initialIndex: 0,
+      length: 6,
+      child: SafeArea(
+        child: Scaffold(
+          appBar: TabBar(
+              tabs: [
+                Tab(text: '胸',),
+                Tab(text: '背中',),
+                Tab(text: '腕',),
+                Tab(text: '肩',),
+                Tab(text: '脚',),
+                Tab(text: '腹',),
+
+              ],
+          ),
+          // appBar: AppBar(),
+          body: TabBarView(
+            children: [
+              Center(
+                child: Column(
+                  children: [
+                    Text('種目',style: TextStyle(fontSize: 24),),
+                    MemoCardWidget(title: 'アームカール', color: Colors.redAccent),
+                    MemoCardWidget(title: 'ハンマーカール', color: Colors.blueAccent),
+                    MemoCardWidget(title: 'レッグレイズ', color: Colors.orangeAccent),
+                    MemoCardWidget(title: 'インクラインロウ', color: Colors.greenAccent),
+                    MemoCardWidget(title: 'ベンチプレス', color: Colors.black),
+                    MemoCardWidget(title: 'ダンベルフライ', color: Colors.yellowAccent),
+                    MemoCardWidget(title: 'ディップス', color: Colors.pinkAccent),
+                  ],
+                ),
+              ),
+              Center(child: Text('背中')),
+              Center(child: Text('腕')),
+              Center(child: Text('肩')),
+              Center(child: Text('脚')),
+              Center(child: Text('腹')),
+            ],
+          ),
+          floatingActionButton: FloatingActionButton(
+            onPressed: (){},
+            child: Icon(Icons.add,color: Colors.white,),
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        child: Icon(Icons.add),
       ),
     );
   }
