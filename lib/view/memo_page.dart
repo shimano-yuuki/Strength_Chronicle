@@ -3,26 +3,71 @@ import 'package:flutter/material.dart';
 class MemoPage extends StatelessWidget {
   const MemoPage({Key? key}) : super(key: key);
 
+  void  _showBottomSheetMenu(BuildContext context) {
+    showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+        ),
+        builder: (builder) {
+          return Container(
+            height: 600.0,
+            color: Colors.transparent,
+            child: Column(
+              children: [
+                const SizedBox(height: 24,),
+                const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Icon(Icons.cancel,color: Colors.grey,),
+                    Text('種目を追加',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
+                    Text('追加',style: TextStyle(color: Colors.orange),)
+                  ],
+                ),
+                const SizedBox(height: 16,),
+                Divider(
+                ),
+                const SizedBox(height: 24,),
+                SizedBox(
+                  width: 300,
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                        contentPadding: EdgeInsets.all(10),
+
+                        hintText: '種目名を入力してください',
+                      border: OutlineInputBorder()
+                    ),
+                  ),
+                ),
+                const Center(
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       initialIndex: 0,
-      length: 6,
+      length: 7,
       child: SafeArea(
         child: Scaffold(
-          appBar: TabBar(
+          appBar: const TabBar(
+            // isScrollable: true,
               tabs: [
+                Tab(text: 'すべて',),
                 Tab(text: '胸',),
                 Tab(text: '背中',),
                 Tab(text: '腕',),
                 Tab(text: '肩',),
                 Tab(text: '脚',),
                 Tab(text: '腹',),
-
               ],
           ),
           // appBar: AppBar(),
-          body: TabBarView(
+          body: const TabBarView(
             children: [
               Center(
                 child: Column(
@@ -38,6 +83,7 @@ class MemoPage extends StatelessWidget {
                   ],
                 ),
               ),
+              Center(child: Text('胸')),
               Center(child: Text('背中')),
               Center(child: Text('腕')),
               Center(child: Text('肩')),
@@ -46,8 +92,10 @@ class MemoPage extends StatelessWidget {
             ],
           ),
           floatingActionButton: FloatingActionButton(
-            onPressed: (){},
-            child: Icon(Icons.add,color: Colors.white,),
+            onPressed: (){
+              _showBottomSheetMenu(context);
+            },
+            child: const Icon(Icons.add,color: Colors.white,),
           ),
         ),
       ),
