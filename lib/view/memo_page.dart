@@ -57,7 +57,7 @@ class MemoPage extends StatelessWidget {
           appBar: const TabBar(
             // isScrollable: true,
               tabs: [
-                Tab(text: 'すべて',),
+                Tab(text: '全て',),
                 Tab(text: '胸',),
                 Tab(text: '背中',),
                 Tab(text: '腕',),
