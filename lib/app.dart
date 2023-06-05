@@ -14,7 +14,7 @@ class BottomNavigation extends ConsumerWidget{
 
 
 
-  static final _screen = [MemoPage(),CalenderPage(),DiaryPage()];
+  static final _screen = [MemoPage(),CalendarPage(),DiaryPage()];
   static final _screenIcon = [Icons.edit_note,Icons.event,Icons.auto_stories,];
 
   @override
