@@ -9,6 +9,19 @@ class CalendarPage extends StatefulWidget {
 class _CalendarPageState extends State<CalendarPage> {
   DateTime _selectedDate = DateTime.now();
 
+  bool _isLeapYear(int year) {
+    if (year % 4 == 0) {
+      if (year % 100 == 0) {
+        if (year % 400 == 0) {
+          return true; // 400で割り切れる年はうるう年
+        }
+        return false; // 100で割り切れる年はうるう年ではない
+      }
+      return true; // 4で割り切れる年はうるう年
+    }
+    return false; // 4で割り切れない年はうるう年ではない
+  }
+
   void _previousMonth() {
     setState(() {
       _selectedDate = DateTime(_selectedDate.year, _selectedDate.month - 1, 1);
@@ -27,14 +40,36 @@ class _CalendarPageState extends State<CalendarPage> {
     });
   }
 
+  bool _isCurrentMonth(DateTime date) {
+    return date.month == _selectedDate.month && date.year == _selectedDate.year;
+  }
+
+  bool _isToday(DateTime date) {
+    final now = DateTime.now();
+    return date.year == now.year && date.month == now.month && date.day == now.day;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('カレンダー'),
+        centerTitle: true,
+        title: Text(
+          'カレンダー',
+          style: TextStyle(color: Colors.white, fontSize: 24),
+        ),
+        actions: [
+          Center(
+            child: IconButton(
+              onPressed: () {},
+              icon: Icon(Icons.today, color: Colors.white),
+            ),
+          ),
+        ],
       ),
       body: Column(
         children: [
+          SizedBox(height: 24),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -42,13 +77,50 @@ class _CalendarPageState extends State<CalendarPage> {
                 icon: Icon(Icons.arrow_back),
                 onPressed: _previousMonth,
               ),
-              Text(
-                DateFormat('yyyy年MM月').format(_selectedDate),
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              TextButton(
+                child: Text(
+                  DateFormat('yyyy年MM月').format(_selectedDate),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+                onPressed: () {},
               ),
               IconButton(
                 icon: Icon(Icons.arrow_forward),
                 onPressed: _nextMonth,
+              ),
+            ],
+          ),
+          SizedBox(height: 24),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Text(
+                '日',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '月',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '火',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '水',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '木',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '金',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              Text(
+                '土',
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
             ],
           ),
@@ -60,20 +132,34 @@ class _CalendarPageState extends State<CalendarPage> {
             ),
             itemBuilder: (BuildContext context, int index) {
               final dayOfMonth = index + 1;
+              final date = DateTime(_selectedDate.year, _selectedDate.month, dayOfMonth);
+              final isCurrentMonth = _isCurrentMonth(date);
+              final isToday = _isToday(date);
+              final isSelectedDay = _selectedDate.day == dayOfMonth && isCurrentMonth;
               return InkWell(
                 onTap: () => _selectDate(dayOfMonth),
-                child: Container(
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _selectedDate.day == dayOfMonth ? Colors.blue : null,
-                  ),
-                  child: Text(
-                    '$dayOfMonth',
-                    style: TextStyle(
-                      color: _selectedDate.day == dayOfMonth ? Colors.white : null,
+                child: Stack(
+                  children: <Widget>[
+                    Center(
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: isSelectedDay ? Colors.orange : isToday ? Colors.black12 : null,
+                        ),
+                      ),
                     ),
-                  ),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        '$dayOfMonth',
+                        style: TextStyle(
+                          color: isSelectedDay ? Colors.white : isCurrentMonth ? Colors.black : Colors.grey,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               );
             },
