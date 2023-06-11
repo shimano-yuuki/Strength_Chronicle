@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workout_app/app.dart';
-import 'package:workout_app/view/memo_page.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+
 
 void main() {
   const app = MyApp();
@@ -15,6 +16,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale("en"),
+        const Locale("ja"),
+      ],
       title: 'StrengthChronicle',
       theme: ThemeData(
         primarySwatch: Colors.orange,
