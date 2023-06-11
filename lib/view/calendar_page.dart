@@ -41,7 +41,7 @@ class _CalendarPageState extends State<CalendarPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text('カレンダー',style: TextStyle(color: Colors.white,fontSize: 24),),
+        title: Text('',style: TextStyle(color: Colors.white,fontSize: 24),),
         actions: [Center(child: IconButton(onPressed: (){},icon: Icon(Icons.today,color: Colors.white,),),)],
       ),
       body: Column(
@@ -56,11 +56,29 @@ class _CalendarPageState extends State<CalendarPage> {
                 onPressed: _previousMonth,
               ),
               TextButton(
+                style: TextButton.styleFrom(
+                side: BorderSide(
+                  color: Colors.orange, //色
+                  width: 0.5, //太さ
+                ),
+              ),
                 child: Text(
-                  DateFormat('yyyy年MM月').format(_selectedDate),
+                  DateFormat('yyyy年     MM月').format(_selectedDate),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
-                onPressed: (){},
+                  onPressed: () async {
+                    final selectedDate = await showDatePicker(
+                      context: context,
+                      initialDate: _selectedDate,
+                      firstDate: DateTime(DateTime.now().year - 1),
+                      lastDate: DateTime(DateTime.now().year + 1),locale: const Locale('ja'),
+                    );
+                    if (selectedDate != null) {
+                      setState(() {
+                        _selectedDate = selectedDate;
+                      });
+                    }
+                  },
               ),
               IconButton(
                 icon: Icon(Icons.arrow_forward),
