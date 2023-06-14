@@ -63,7 +63,7 @@ class _CalendarPageState extends State<CalendarPage> {
                 ),
               ),
                 child: Text(
-                  DateFormat('yyyy年     MM月').format(_selectedDate),
+                  DateFormat('  yyyy年     MM月  ').format(_selectedDate),
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
                   onPressed: () async {
