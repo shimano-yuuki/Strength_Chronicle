@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class MemoPage extends StatelessWidget {
+class MemoPage extends ConsumerWidget {
   const MemoPage({Key? key}) : super(key: key);
+
 
   void  _showBottomSheetMenu(BuildContext context) {
     showModalBottomSheet(
@@ -39,7 +41,39 @@ class MemoPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const Center(
+                SizedBox(height: 24,),
+                SizedBox(
+                  width: 300,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: 10,
+                            height: 10,
+                            decoration: BoxDecoration(
+                              color: Colors.orange,
+                              shape: BoxShape.circle
+                            ),
+                          ),
+                          SizedBox(width: 10,),
+                          Text('トレーニング種類',style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+
+                        ],
+                      ),
+                      SizedBox(
+                        width: 300,
+                          height: 300,
+                          child: DropdownButton(
+                            // value: ,
+                              items: ['胸','背中','腕','肩','脚','腹',]
+                                  .map((String list) =>
+                                  DropdownMenuItem(value: list, child: Text(list)))
+                                  .toList(),
+                              onChanged: (String? value){})
+                          ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -48,7 +82,7 @@ class MemoPage extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return DefaultTabController(
       initialIndex: 0,
       length: 7,
