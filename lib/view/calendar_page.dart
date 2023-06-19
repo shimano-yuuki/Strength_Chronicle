@@ -1,5 +1,7 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class CalendarPage extends StatefulWidget {
   @override
@@ -7,154 +9,77 @@ class CalendarPage extends StatefulWidget {
 }
 
 class _CalendarPageState extends State<CalendarPage> {
-  DateTime _selectedDate = DateTime.now();
-
-  void _previousMonth() {
-    setState(() {
-      _selectedDate = DateTime(_selectedDate.year, _selectedDate.month - 1, 1);
-    });
+  CalendarFormat _calendarFormat = CalendarFormat.month;
+  DateTime _focusedDay = DateTime.now();
+  DateTime? _selectedDay;
+  Map<DateTime, List> _eventsList = {};
+  int getHashCode(DateTime key) {
+    return key.day * 1000000 + key.month * 10000 + key.year;
   }
 
-  void _nextMonth() {
-    setState(() {
-      _selectedDate = DateTime(_selectedDate.year, _selectedDate.month + 1, 1);
-    });
-  }
-
-  void _selectDate(int day) {
-    setState(() {
-      _selectedDate = DateTime(_selectedDate.year, _selectedDate.month, day);
-    });
-  }
-
-  bool _isCurrentMonth(DateTime date) {
-    return date.month == _selectedDate.month && date.year == _selectedDate.year;
-  }
-
-  bool _isToday(DateTime date) {
-    final now = DateTime.now();
-    return date.year == now.year && date.month == now.month && date.day == now.day;
+  @override
+  void initState() {
+    super.initState();
+    _selectedDay = _focusedDay;
+    _eventsList = {
+    };
   }
 
   @override
   Widget build(BuildContext context) {
+    final _events = LinkedHashMap<DateTime, List>(
+      equals: isSameDay,
+      hashCode: getHashCode,
+    )..addAll(_eventsList);
+
+    List _getEventForDay(DateTime day) {
+      return _events[day] ?? [];
+    }
+
+
     return Scaffold(
       appBar: AppBar(
-        centerTitle: true,
-        title: Text('',style: TextStyle(color: Colors.white,fontSize: 24),),
-        actions: [Center(child: IconButton(onPressed: (){},icon: Icon(Icons.today,color: Colors.white,),),)],
+        title: Text('calendar sample'),
       ),
       body: Column(
-
         children: [
-          SizedBox(height: 24),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: _previousMonth,
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                side: BorderSide(
-                  color: Colors.orange, //色
-                  width: 0.5, //太さ
-                ),
-              ),
-                child: Text(
-                  DateFormat('  yyyy年     MM月  ').format(_selectedDate),
-                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                ),
-                  onPressed: () async {
-                    final selectedDate = await showDatePicker(
-                      context: context,
-                      initialDate: _selectedDate,
-                      firstDate: DateTime(DateTime.now().year - 1),
-                      lastDate: DateTime(DateTime.now().year + 1),locale: const Locale('ja'),
-                    );
-                    if (selectedDate != null) {
-                      setState(() {
-                        _selectedDate = selectedDate;
-                      });
-                    }
-                  },
-              ),
-              IconButton(
-                icon: Icon(Icons.arrow_forward),
-                onPressed: _nextMonth,
-              ),
-            ],
-          ),
-          SizedBox(height: 24),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Text(
-                '日',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '月',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '火',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '水',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '木',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '金',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              Text(
-                '土',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          GridView.builder(
-            shrinkWrap: true,
-            itemCount: DateTime(_selectedDate.year, _selectedDate.month + 1, 0).day,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 7,
-            ),
-            itemBuilder: (BuildContext context, int index) {
-              final dayOfMonth = index + 1;
-              final date = DateTime(_selectedDate.year, _selectedDate.month, dayOfMonth);
-              final isCurrentMonth = _isCurrentMonth(date);
-              final isToday = _isToday(date);
-              final isSelectedDay = _selectedDate.day == dayOfMonth && isCurrentMonth;
-              return InkWell(
-
-                onTap: () => _selectDate(dayOfMonth),
-                child: Stack(
-                  children:<Widget> [
-                    Center(child: Container(width: 40,height: 40,decoration:BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: isSelectedDay ? Colors.orange : isToday ? Colors.black12 : null,
-                    ),)),
-                    Container(
-                    alignment: Alignment.center,
-
-                    child: Text(
-                      '$dayOfMonth',
-                      style: TextStyle(
-                        color: isSelectedDay ? Colors.white : isCurrentMonth ? Colors.black : Colors.grey,
-                      ),
-                    ),
-                  )],
-                ),
-              );
+          TableCalendar(
+            firstDay: DateTime.utc(2020, 1, 1),
+            lastDay: DateTime.utc(2030, 12, 31),
+            focusedDay: _focusedDay,
+            eventLoader: _getEventForDay,
+            calendarFormat: _calendarFormat,
+            onFormatChanged: (format) {
+              if (_calendarFormat != format) {
+                setState(() {
+                  _calendarFormat = format;
+                });
+              }
+            },
+            selectedDayPredicate: (day) {
+              return isSameDay(_selectedDay, day);
+            },
+            onDaySelected: (selectedDay, focusedDay) {
+              if (!isSameDay(_selectedDay, selectedDay)) {
+                setState(() {
+                  _selectedDay = selectedDay;
+                  _focusedDay = focusedDay;
+                });
+                _getEventForDay(selectedDay);
+              }
+            },
+            onPageChanged: (focusedDay) {
+              _focusedDay = focusedDay;
             },
           ),
+          ListView(
+            shrinkWrap: true,
+            children: _getEventForDay(_selectedDay!)
+                .map((event) => ListTile(
+              title: Text(event.toString()),
+            ))
+                .toList(),
+          )
         ],
       ),
     );
