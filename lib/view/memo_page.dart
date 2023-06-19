@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:workout_app/view/memo_detail_page.dart';
 
 class MemoPage extends ConsumerWidget {
   const MemoPage({Key? key}) : super(key: key);
@@ -80,15 +81,15 @@ class MemoPage extends ConsumerWidget {
           );
         });
   }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+
     return DefaultTabController(
       initialIndex: 0,
       length: 7,
       child: SafeArea(
         child: Scaffold(
-          appBar: const TabBar(
+          appBar: TabBar(
             // isScrollable: true,
               tabs: [
                 Tab(text: '全て',),
@@ -101,7 +102,7 @@ class MemoPage extends ConsumerWidget {
               ],
           ),
           // appBar: AppBar(),
-          body: const TabBarView(
+          body:  TabBarView(
             children: [
               Center(
                 child: Column(
@@ -145,32 +146,35 @@ class MemoCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children: [
-          SizedBox(
-            width: 300,
-            height: 50,
-            child: Card(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const SizedBox(width: 10,),
-                  Container(
-                    width: 16,
-                    height: 16,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: color),
-                    ),
-                  Expanded(child: Container()),
-                  Text(title),
-                  Expanded(child: Container()),
-                ],
-              ),
-            ),
+    return InkWell(
+      child: SizedBox(
+        width: 300,
+        height: 50,
+        child: Card(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const SizedBox(width: 10,),
+              Container(
+                width: 16,
+                height: 16,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: color),
+                ),
+              Expanded(child: Container()),
+              Text(title),
+              Expanded(child: Container()),
+            ],
           ),
-        ],
-      );
+        ),
+      ),
+      onTap: (){
+        /// メモのデータ ///
+        /// 画面遷移 ///
+        Navigator.push(context, MaterialPageRoute(builder: (context) => MemoDetailPage()));
+      }
+    );
   }
 }
 
