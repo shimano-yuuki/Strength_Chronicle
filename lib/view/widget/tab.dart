@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:workout_app/model/memo_state.dart';
-import 'package:workout_app/view/memo_page.dart';
+import 'package:workout_app/view/widget/memo_card.dart';
 
 class TabViewWidget extends StatelessWidget {
   const TabViewWidget({super.key, required this.memos, this.part});
