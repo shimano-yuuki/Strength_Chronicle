@@ -6,7 +6,7 @@ part of 'memo_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$textFromFieldHash() => r'17e23554a2c7d53451e3ee0c40b4cb95400bc641';
+String _$textFromFieldHash() => r'313a1e0ca94b319006d843613a736669c7148a1e';
 
 /// See also [TextFromField].
 @ProviderFor(TextFromField)
@@ -36,4 +36,20 @@ final memosProvider = AutoDisposeNotifierProvider<Memos, List<Memo>>.internal(
 );
 
 typedef _$Memos = AutoDisposeNotifier<List<Memo>>;
+String _$dropDownButtonHash() => r'6f7be4e833f5191bcfdcfac24c15641344af60da';
+
+/// See also [DropDownButton].
+@ProviderFor(DropDownButton)
+final dropDownButtonProvider =
+    AutoDisposeNotifierProvider<DropDownButton, String>.internal(
+  DropDownButton.new,
+  name: r'dropDownButtonProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$dropDownButtonHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$DropDownButton = AutoDisposeNotifier<String>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

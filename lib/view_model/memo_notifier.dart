@@ -2,6 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:workout_app/model/memo_state.dart';
 part 'memo_notifier.g.dart';
 
+
 @riverpod
 class TextFromField extends _$TextFromField {
   @override
@@ -31,4 +32,23 @@ class Memos extends _$Memos {
   }
 }
 
+@riverpod
+  class DropDownButton extends _$DropDownButton {
 
+  String? aaa;
+  String? bb;
+
+  @override
+   String build() {
+  return '';
+  }
+  void selectedPart(String? value){
+    state = value!;
+    aaa = value;
+  }
+  void selectedType(String? value){
+    state = value!;
+    bb = value;
+
+  }
+}
