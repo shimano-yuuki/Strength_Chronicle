@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workout_app/model/memo_state.dart';
 import 'package:workout_app/view/memo_detail_page.dart';
 import 'package:workout_app/view/widget/bottom_sheet.dart';
+import 'package:workout_app/view/widget/tab.dart';
 import 'package:workout_app/view_model/memo_notifier.dart';
 
 class MemoPage extends ConsumerWidget {
@@ -10,7 +11,6 @@ class MemoPage extends ConsumerWidget {
 
 
   void  _showBottomSheetMenu(BuildContext context,WidgetRef ref) {
-
     showModalBottomSheet(
         context: context,
         shape: const RoundedRectangleBorder(
@@ -21,10 +21,13 @@ class MemoPage extends ConsumerWidget {
         });
   }
 
+
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
     final List<Memo> memos = ref.watch(memosProvider);
+
     return DefaultTabController(
       initialIndex: 0,
       length: 7,
@@ -45,28 +48,13 @@ class MemoPage extends ConsumerWidget {
           // appBar: AppBar(),
           body:  TabBarView(
             children: [
-              Center(
-                child: Column(
-                  children: [
-                    Text('種目',style: TextStyle(fontSize: 24),),
-                    Expanded(
-                      child: ListView.builder(
-                        itemCount: memos.length,
-                          itemBuilder: (BuildContext context, int index){
-                          return MemoCardWidget(title: memos[index].title, part: memos[index].part,);
-                          }
-                      ),
-                    ),
-
-                  ],
-                ),
-              ),
-              Center(child: Text('胸')),
-              Center(child: Text('背中')),
-              Center(child: Text('腕')),
-              Center(child: Text('肩')),
-              Center(child: Text('脚')),
-              Center(child: Text('腹')),
+              TabViewWidget(memos: memos),
+              TabViewWidget(memos: memos, part: '胸'),
+              TabViewWidget(memos: memos, part: '背中'),
+              TabViewWidget(memos: memos, part: '腕'),
+              TabViewWidget(memos: memos, part: '肩'),
+              TabViewWidget(memos: memos, part: '脚'),
+              TabViewWidget(memos: memos, part: '腹'),
             ],
           ),
           floatingActionButton: FloatingActionButton(
@@ -137,4 +125,3 @@ class MemoCardWidget extends ConsumerWidget {
     );
   }
 }
-

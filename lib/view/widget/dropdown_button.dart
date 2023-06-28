@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workout_app/view_model/memo_notifier.dart';
 
 class DropdownWidget extends ConsumerWidget {
-  DropdownWidget(this.items, this.name, {super.key});
+  const DropdownWidget(this.items, this.name, {super.key});
 
   final List<String>  items;
   final String name;
