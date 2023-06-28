@@ -6,7 +6,7 @@ part of 'memo_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$textFromFieldHash() => r'313a1e0ca94b319006d843613a736669c7148a1e';
+String _$textFromFieldHash() => r'c8c12e3256596cc3acb55e5576037197b0e36cac';
 
 /// See also [TextFromField].
 @ProviderFor(TextFromField)
@@ -36,7 +36,7 @@ final memosProvider = AutoDisposeNotifierProvider<Memos, List<Memo>>.internal(
 );
 
 typedef _$Memos = AutoDisposeNotifier<List<Memo>>;
-String _$dropDownButtonHash() => r'6f7be4e833f5191bcfdcfac24c15641344af60da';
+String _$dropDownButtonHash() => r'501c9bfb9142216a8a97658c677f182afb9cc08d';
 
 /// See also [DropDownButton].
 @ProviderFor(DropDownButton)

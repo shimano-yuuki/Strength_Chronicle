@@ -5,13 +5,13 @@ import 'package:workout_app/view/widget/dropdown_button.dart';
 import 'package:workout_app/view_model/memo_notifier.dart';
 
 class BottomSheetWidget extends ConsumerWidget {
-  BottomSheetWidget({Key? key}) : super(key: key);
+  const BottomSheetWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     String? id =  "11111";
-    String? title;
-    String? part = ref.watch(dropDownButtonProvider);
+    String title = ref.watch(textFromFieldProvider);
+    String part = ref.watch(dropDownButtonProvider);
     String? type = "自重";
     return Container(
       height: 600.0,
@@ -25,11 +25,12 @@ class BottomSheetWidget extends ConsumerWidget {
               Icon(Icons.cancel,color: Colors.grey,),
               Text('種目を追加',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
               TextButton(onPressed: (){
-                final memo = Memo(id: id!, title: title!, part: part!, type: type!);
-                print('id:$id');
-                print('タイトル:$title');
-                print('部位:$part');
-                print('トレーニング種類:$type');
+                final memo = Memo(id: id, title: title, part: part, type: type);
+                // print('id:$id');
+                // print('タイトル:$title');
+                // print('部位:$part');
+                // print('トレーニング種類:$type');
+                print(memo);
                 ref.watch(memosProvider.notifier).addMemo(memo);
                 Navigator.of(context).pop();
               }, child: Text('追加',style: TextStyle(color: Colors.orange)),)
@@ -43,9 +44,13 @@ class BottomSheetWidget extends ConsumerWidget {
             width: 300,
             child: TextFormField(
               onChanged: (String text){
-                ref.watch(textFromFieldProvider.notifier).changeText(text);
-                title = ref.watch(textFromFieldProvider);
+                ref.read(textFromFieldProvider.notifier).changeText(text);
+                print(ref.watch(textFromFieldProvider));
+                print(part);
+                print(type);
+                print(id);
               },
+              autofocus: true,
               decoration: const InputDecoration(
                   contentPadding: EdgeInsets.all(10),
                   hintText: '種目名を入力してください',
@@ -63,7 +68,9 @@ class BottomSheetWidget extends ConsumerWidget {
                   children: [
                     DropdownWidget(['胸','背中','腕','肩','脚','腹',], '部位'),
                     SizedBox(height: 24,),
-                    DropdownWidget(['自重','フリーウェイト','マシン'], 'トレーニング種類')
+                    // DropdownWidget(['自重','フリーウェイト','マシン'], 'トレーニング種類')
+                    // DropdownWidget(['胸','背中','腕','肩','脚','腹',], '部位'),
+
                   ],
                 ),
               ),
