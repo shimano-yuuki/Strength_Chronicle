@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:workout_app/model/memo_state.dart';
 import 'package:workout_app/view/memo_detail_page.dart';
 
 class MemoCardWidget extends ConsumerWidget {
-  const MemoCardWidget({Key? key, required this.title, required this.part}) : super(key: key);
 
-  final String title;
-  final String part;
+  final Memo memo;
+
+  const MemoCardWidget({
+    required this.memo,
+    Key? key,
+  }) : super(key: key);
 
 
   colorChange(String part){
@@ -28,9 +32,12 @@ class MemoCardWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    String title = memo.title;
+    String part =memo.part;
     return InkWell(
         child: SizedBox(
-          height: 50,
+          width:200,
+          height: 60,
           child: Card(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -53,7 +60,7 @@ class MemoCardWidget extends ConsumerWidget {
         onTap: (){
           /// メモのデータ ///
           /// 画面遷移 ///
-          Navigator.push(context, MaterialPageRoute(builder: (context) => MemoDetailPage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => MemoDetailPage(memo: memo,)));
         }
     );
   }

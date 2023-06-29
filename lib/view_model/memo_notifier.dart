@@ -35,20 +35,22 @@ class Memos extends _$Memos {
 @riverpod
   class DropDownButton extends _$DropDownButton {
 
-  String? aaa;
-  String? bb;
-
   @override
    String build() {
   return '';
   }
   void selectedPart(String? value){
     state = value!;
-    aaa = value;
   }
   void selectedType(String? value){
     state = value!;
-    bb = value;
-
+  }
+  String? stringSelectPart(String? value){
+    final part  = value;
+    return part;
+  }
+  String? stringSelectType(String? value){
+    final type  = value;
+    return type;
   }
 }
