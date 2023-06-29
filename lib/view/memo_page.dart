@@ -9,25 +9,9 @@ import 'package:workout_app/view_model/memo_notifier.dart';
 class MemoPage extends ConsumerWidget {
   const MemoPage({Key? key}) : super(key: key);
 
-
-  void  _showBottomSheetMenu(BuildContext context,WidgetRef ref) {
-    showModalBottomSheet(
-        context: context,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
-        ),
-        builder: (builder) {
-          return const BottomSheetWidget();
-        });
-  }
-
-
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final List<Memo> memos = ref.watch(memosProvider);
-
     return DefaultTabController(
       initialIndex: 0,
       length: 7,
@@ -66,6 +50,16 @@ class MemoPage extends ConsumerWidget {
         ),
       ),
     );
+  }
+  void  _showBottomSheetMenu(BuildContext context,WidgetRef ref) {
+    showModalBottomSheet(
+        context: context,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
+        ),
+        builder: (builder) {
+          return const BottomSheetWidget();
+        });
   }
 }
 

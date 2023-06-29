@@ -28,8 +28,7 @@ class TabViewWidget extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               if (part == null || memos[index].part == part) {
                 return MemoCardWidget(
-                  title: memos[index].title,
-                  part: memos[index].part,
+                  memo:memos[index],
                 );
               } else {
                 return SizedBox(); // 非表示にする
