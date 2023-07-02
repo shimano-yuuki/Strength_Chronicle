@@ -1,92 +1,39 @@
-import 'dart:collection';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class CalendarPage extends StatefulWidget {
-  @override
-  _CalendarPageState createState() => _CalendarPageState();
-}
+import '../view_model/calendar_notifier.dart';
 
-class _CalendarPageState extends State<CalendarPage> {
-  CalendarFormat _calendarFormat = CalendarFormat.month;
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
-  Map<DateTime, List> _eventsList = {};
-  int getHashCode(DateTime key) {
-    return key.day * 1000000 + key.month * 10000 + key.year;
-  }
+class CalendarPage extends ConsumerWidget {
+  const CalendarPage({super.key});
 
   @override
-  void initState() {
-    super.initState();
-    _selectedDay = _focusedDay;
-    _eventsList = {
-    };
-  }
+  Widget build(BuildContext context,WidgetRef ref) {
 
-  @override
-  Widget build(BuildContext context) {
-    final _events = LinkedHashMap<DateTime, List>(
-      equals: isSameDay,
-      hashCode: getHashCode,
-    )..addAll(_eventsList);
-
-    List _getEventForDay(DateTime day) {
-      return _events[day] ?? [];
-    }
-
+    DateTime selectedDay = ref.watch(daySelectedProvider);
+    DateTime focusedDay = ref.watch(daySelectedProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('calendar sample'),
-      ),
+      appBar: AppBar(),
       body: Column(
         children: [
-          TableCalendar(
-            headerStyle: HeaderStyle(
-              formatButtonVisible: false,
-              titleCentered: true,
-            ),
-            locale: 'ja_JP',
-            firstDay: DateTime.utc(2020, 1, 1),
-            lastDay: DateTime.utc(2030, 12, 31),
-            focusedDay: _focusedDay,
-            eventLoader: _getEventForDay,
-            calendarFormat: _calendarFormat,
-            onFormatChanged: (format) {
-              if (_calendarFormat != format) {
-                setState(() {
-                  _calendarFormat = format;
-                });
-              }
-            },
-            selectedDayPredicate: (day) {
-              return isSameDay(_selectedDay, day);
-            },
-            onDaySelected: (selectedDay, focusedDay) {
-              if (!isSameDay(_selectedDay, selectedDay)) {
-                setState(() {
-                  _selectedDay = selectedDay;
-                  _focusedDay = focusedDay;
-                });
-                _getEventForDay(selectedDay);
-              }
-            },
-            onPageChanged: (focusedDay) {
-              _focusedDay = focusedDay;
-            },
+        TableCalendar(
+          headerStyle: const HeaderStyle(
+            formatButtonVisible: false,
+            titleCentered: true,
           ),
-          ListView(
-            shrinkWrap: true,
-            children: _getEventForDay(_selectedDay!)
-                .map((event) => ListTile(
-              title: Text(event.toString()),
-            ))
-                .toList(),
-          )
-        ],
-      ),
+          locale: 'ja_JP',
+          focusedDay: focusedDay,
+          firstDay: DateTime.utc(2010, 1, 1),
+          lastDay: DateTime.utc(2031,1,1),
+          selectedDayPredicate: (day) {
+            return isSameDay(selectedDay, day);
+          },
+          onDaySelected: (selectedDay, focusedDay) {
+            ref.read(daySelectedProvider.notifier).changeSelectedDay(focusedDay, selectedDay);
+          },
+        )
+      ],),
     );
   }
 }
