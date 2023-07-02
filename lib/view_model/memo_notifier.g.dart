@@ -6,7 +6,7 @@ part of 'memo_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$textFromFieldHash() => r'c8c12e3256596cc3acb55e5576037197b0e36cac';
+String _$textFromFieldHash() => r'313a1e0ca94b319006d843613a736669c7148a1e';
 
 /// See also [TextFromField].
 @ProviderFor(TextFromField)
