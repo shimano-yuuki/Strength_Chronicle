@@ -34,34 +34,36 @@ class MemoCardWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     String title = memo.title;
     String part =memo.part;
-    return InkWell(
-        child: SizedBox(
-          width:200,
-          height: 60,
-          child: Card(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const SizedBox(width: 10,),
-                Container(
-                  width: 16,
-                  height: 16,
-                  decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: colorChange(part)),
-                ),
-                Expanded(child: Container()),
-                Text(title),
-                Expanded(child: Container()),
-              ],
+    return Center(
+      child: SizedBox(
+        width: 350,
+        height: 65,
+        child: InkWell(
+            child: Card(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const SizedBox(width: 10,),
+                  Container(
+                    width: 16,
+                    height: 16,
+                    decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: colorChange(part)),
+                  ),
+                  Expanded(child: Container()),
+                  Text(title,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
+                  Expanded(child: Container()),
+                ],
+              ),
             ),
-          ),
+            onTap: (){
+              /// メモのデータ ///
+              /// 画面遷移 ///
+              Navigator.push(context, MaterialPageRoute(builder: (context) => MemoDetailPage(memo: memo,)));
+            }
         ),
-        onTap: (){
-          /// メモのデータ ///
-          /// 画面遷移 ///
-          Navigator.push(context, MaterialPageRoute(builder: (context) => MemoDetailPage(memo: memo,)));
-        }
+      ),
     );
   }
 }

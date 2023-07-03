@@ -20,32 +20,27 @@ class DropdownWidget extends ConsumerWidget {
               Container(
                 width: 10,
                 height: 10,
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     color: Colors.orange,
                     shape: BoxShape.circle
                 ),
               ),
-              SizedBox(width: 10,),
+              const SizedBox(width: 10,),
               Text(name,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
             ],
           ),
-          SizedBox(
-              width: 300,
-              // height: 300,
-              child: DropdownButton(
-                  value: value != '' ? value : null,
-                  hint: Text('選択してください'),
-                  items: items
-                      .map((String list) =>
-                      DropdownMenuItem(value: list, child: Text(list)))
-                      .toList(),
-                  onChanged: (String? newValue){
-                    print('oldstate:$value');
-                    ref.watch(dropDownButtonProvider.notifier).selectedPart(newValue);
-                    print('newstate:$newValue');
-                  },
-              ),
-          ),
+          DropdownButton(
+              value: value != '' ? value : null,
+              hint: const Text('選択してください'),
+              items: items
+                  .map((String list) =>
+                  DropdownMenuItem(value: list, child: Text(list)))
+                  .toList(),
+              onChanged: (String? newValue){
+                ref.watch(dropDownButtonProvider.notifier).selectedPart(newValue);
+              },
+            isExpanded: true,
+            ),
         ],
       ),
     );

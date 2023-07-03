@@ -26,11 +26,6 @@ class BottomSheetWidget extends ConsumerWidget {
               Text('種目を追加',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),),
               TextButton(onPressed: (){
                 final memo = Memo(id: id, title: title, part: part, type: type);
-                // print('id:$id');
-                // print('タイトル:$title');
-                // print('部位:$part');
-                // print('トレーニング種類:$type');
-                print(memo);
                 ref.watch(memosProvider.notifier).addMemo(memo);
                 Navigator.of(context).pop();
               }, child: Text('追加',style: TextStyle(color: Colors.orange)),)
@@ -70,7 +65,6 @@ class BottomSheetWidget extends ConsumerWidget {
                     SizedBox(height: 24,),
                     // DropdownWidget(['自重','フリーウェイト','マシン'], 'トレーニング種類')
                     // DropdownWidget(['胸','背中','腕','肩','脚','腹',], '部位'),
-
                   ],
                 ),
               ),
