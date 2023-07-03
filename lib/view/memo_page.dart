@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:workout_app/model/memo_state.dart';
-import 'package:workout_app/view/memo_detail_page.dart';
 import 'package:workout_app/view/widget/bottom_sheet.dart';
 import 'package:workout_app/view/widget/tab.dart';
-import 'package:workout_app/view_model/memo_notifier.dart';
 
 class MemoPage extends ConsumerWidget {
   const MemoPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<Memo> memos = ref.watch(memosProvider);
     return DefaultTabController(
       initialIndex: 0,
       length: 7,
-      child: SafeArea(
-        child: Scaffold(
-          appBar: TabBar(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('種目名',style: TextStyle(fontWeight: FontWeight.bold),),
+          actions: [IconButton(icon: Icon(Icons.more_vert), onPressed: () {}),],
+          centerTitle: true,
+          elevation: 5,
+          bottom: TabBar(
             // isScrollable: true,
+            labelStyle: TextStyle(fontWeight: FontWeight.bold),
               tabs: [
                 Tab(text: '全て',),
                 Tab(text: '胸',),
@@ -29,23 +30,49 @@ class MemoPage extends ConsumerWidget {
                 Tab(text: '腹',),
               ],
           ),
-          // appBar: AppBar(),
-          body:  TabBarView(
+        ),
+        // appBar: AppBar(),
+        body:  TabBarView(
+          children: [
+            TabViewWidget(),
+            TabViewWidget(part: '胸'),
+            TabViewWidget(part: '背中'),
+            TabViewWidget(part: '腕'),
+            TabViewWidget(part: '肩'),
+            TabViewWidget(part: '脚'),
+            TabViewWidget(part: '腹'),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            _showBottomSheetMenu(context,ref);
+          },
+          child: const Icon(Icons.add,color: Colors.white,),
+        ),
+        drawer: Drawer(
+          child: ListView(
             children: [
-              TabViewWidget(memos: memos),
-              TabViewWidget(memos: memos, part: '胸'),
-              TabViewWidget(memos: memos, part: '背中'),
-              TabViewWidget(memos: memos, part: '腕'),
-              TabViewWidget(memos: memos, part: '肩'),
-              TabViewWidget(memos: memos, part: '脚'),
-              TabViewWidget(memos: memos, part: '腹'),
+              ListTile(
+                title: Text('メモページ'),
+                onTap: (){
+                  Navigator.pop(context);
+
+                },
+              ),
+              ListTile(
+                title: Text('カレンダー'),
+                onTap: (){
+                  Navigator.pop(context);
+
+                },
+              ),
+              ListTile(
+                title: Text('日記'),
+                onTap: (){
+                  Navigator.pop(context);
+                },
+              ),
             ],
-          ),
-          floatingActionButton: FloatingActionButton(
-            onPressed: (){
-              _showBottomSheetMenu(context,ref);
-            },
-            child: const Icon(Icons.add,color: Colors.white,),
           ),
         ),
       ),
@@ -62,4 +89,5 @@ class MemoPage extends ConsumerWidget {
         });
   }
 }
+
 

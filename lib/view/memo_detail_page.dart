@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workout_app/model/memo_state.dart';
+import 'package:workout_app/view_model/memo_notifier.dart';
 
-class MemoDetailPage extends StatelessWidget {
+class MemoDetailPage extends ConsumerWidget {
   const MemoDetailPage({Key? key, required this.memo}) : super(key: key);
+
   final Memo memo;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context,WidgetRef ref) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        actions: [
+          IconButton(onPressed: (){
+            ref.watch(memosProvider).remove(memo);
+            print('vnckdnvdk');
+            }, icon: Icon(Icons.delete_forever_outlined),)],
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: SafeArea(
@@ -19,6 +28,7 @@ class MemoDetailPage extends StatelessWidget {
               Container(
                 height: 250,
                 decoration: BoxDecoration(
+                  color: Colors.white,
                   border: Border.all(),
                   borderRadius: BorderRadius.circular(10)
                 ),

@@ -36,7 +36,7 @@ final memosProvider = AutoDisposeNotifierProvider<Memos, List<Memo>>.internal(
 );
 
 typedef _$Memos = AutoDisposeNotifier<List<Memo>>;
-String _$dropDownButtonHash() => r'501c9bfb9142216a8a97658c677f182afb9cc08d';
+String _$dropDownButtonHash() => r'5d0d80875493daf5a901b14798e7d34b5f7ee613';
 
 /// See also [DropDownButton].
 @ProviderFor(DropDownButton)

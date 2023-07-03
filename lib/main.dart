@@ -21,6 +21,9 @@ class MyApp extends StatelessWidget {
       title: 'StrengthChronicle',
       theme: ThemeData(
         primarySwatch: Colors.orange,
+        appBarTheme: AppBarTheme(
+          backgroundColor: Colors.white
+        )
       ),
       home: BottomNavigation(),
     );
