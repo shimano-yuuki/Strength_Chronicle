@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:uuid/uuid.dart';
 import 'package:workout_app/model/memo_state.dart';
 import 'package:workout_app/view/widget/dropdown_button.dart';
 import 'package:workout_app/view_model/memo_notifier.dart';
@@ -9,7 +10,7 @@ class BottomSheetWidget extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    String? id =  "11111";
+    String? id = Uuid().v4();
     String title = ref.watch(textFromFieldProvider);
     String part = ref.watch(dropDownButtonProvider);
     String? type = "自重";
@@ -40,10 +41,6 @@ class BottomSheetWidget extends ConsumerWidget {
             child: TextFormField(
               onChanged: (String text){
                 ref.read(textFromFieldProvider.notifier).changeText(text);
-                print(ref.watch(textFromFieldProvider));
-                print(part);
-                print(type);
-                print(id);
               },
               autofocus: true,
               decoration: const InputDecoration(

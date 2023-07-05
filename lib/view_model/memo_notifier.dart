@@ -2,6 +2,16 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:workout_app/model/memo_state.dart';
 part 'memo_notifier.g.dart';
 
+@riverpod
+class Visible extends _$Visible {
+  @override
+  bool build() {
+    return true;
+  }
+  void changeVisible(bool bool ){
+    state = bool;
+  }
+}
 
 @riverpod
 class TextFromField extends _$TextFromField {
@@ -25,11 +35,11 @@ class Memos extends _$Memos {
     state = [...state, memo];
   }
   void removeMemo(String memoId){
-    state = [
-      for (final memo in state)
-        if (memo.id == memoId) memo
-    ];
+
+    state.removeWhere((memo) => memo.id == memoId);
   }
+
+
 }
 
 @riverpod
