@@ -6,6 +6,20 @@ part of 'memo_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$visibleHash() => r'07878e4d95d16d0abbc451770a92f35d051d6475';
+
+/// See also [Visible].
+@ProviderFor(Visible)
+final visibleProvider = AutoDisposeNotifierProvider<Visible, bool>.internal(
+  Visible.new,
+  name: r'visibleProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$visibleHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Visible = AutoDisposeNotifier<bool>;
 String _$textFromFieldHash() => r'313a1e0ca94b319006d843613a736669c7148a1e';
 
 /// See also [TextFromField].
@@ -22,7 +36,7 @@ final textFromFieldProvider =
 );
 
 typedef _$TextFromField = AutoDisposeNotifier<String>;
-String _$memosHash() => r'8d7803e1eeca9009f9f44d0d178f91c494522b3a';
+String _$memosHash() => r'a9e913e6aafa7990c93114b457364bb841a84dc9';
 
 /// See also [Memos].
 @ProviderFor(Memos)

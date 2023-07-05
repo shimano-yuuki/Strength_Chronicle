@@ -54,6 +54,7 @@ class MemoCardWidget extends ConsumerWidget {
                   Expanded(child: Container()),
                   Text(title,style: TextStyle(fontSize: 16,fontWeight: FontWeight.bold),),
                   Expanded(child: Container()),
+
                 ],
               ),
             ),
