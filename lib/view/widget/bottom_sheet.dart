@@ -12,6 +12,7 @@ class BottomSheetWidget extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     String? id = Uuid().v4();
     String title = ref.watch(textFromFieldProvider);
+    // String part = ref.watch(dropDownButtonProvider);
     String part = ref.watch(dropDownButtonProvider);
     String? type = "自重";
     return Container(
