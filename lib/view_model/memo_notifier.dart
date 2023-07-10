@@ -35,32 +35,39 @@ class Memos extends _$Memos {
     state = [...state, memo];
   }
   void removeMemo(String memoId){
-
     state.removeWhere((memo) => memo.id == memoId);
   }
-
-
 }
 
 @riverpod
   class DropDownButton extends _$DropDownButton {
-
   @override
-   String build() {
-  return '';
+  DropDownButtonState build() {
+  return DropDownButtonState(part: '',type: '');
   }
-  void selectedPart(String? value){
-    state = value!;
+
+  void selected({
+    String? part,
+    String? type
+  }){
+    state = state.copyWith(part: part,type: type);
   }
-  void selectedType(String? value){
-    state = value!;
+}
+
+class DropDownButtonState{
+  DropDownButtonState({required this.part, required this.type});
+
+  final String part;
+  final String type;
+
+  DropDownButtonState copyWith({
+    String? part,
+    String? type,
+}){
+    return DropDownButtonState(
+      part: part ?? this.part,
+      type: type ?? this.type,
+    );
   }
-  String? stringSelectPart(String? value){
-    final part  = value;
-    return part;
-  }
-  String? stringSelectType(String? value){
-    final type  = value;
-    return type;
-  }
+
 }

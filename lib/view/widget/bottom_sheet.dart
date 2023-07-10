@@ -13,8 +13,8 @@ class BottomSheetWidget extends ConsumerWidget {
     String? id = Uuid().v4();
     String title = ref.watch(textFromFieldProvider);
     // String part = ref.watch(dropDownButtonProvider);
-    String part = ref.watch(dropDownButtonProvider);
-    String? type = "自重";
+    String part = ref.watch(dropDownButtonProvider).part;
+    String? type = ref.watch(dropDownButtonProvider).type;
     return Container(
       height: 600.0,
       color: Colors.transparent,
@@ -59,9 +59,9 @@ class BottomSheetWidget extends ConsumerWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 24.0),
                 child: Column(
                   children: [
-                    DropdownWidget(['胸','背中','腕','肩','脚','腹',], '部位'),
+                    DropdownWidget(['胸','背中','腕','肩','脚','腹',], DropButtonType.part),
                     SizedBox(height: 24,),
-                    // DropdownWidget(['自重','フリーウェイト','マシン'], 'トレーニング種類')
+                    DropdownWidget(['自重','フリーウェイト','マシン'],  DropButtonType.trainingType)
                     // DropdownWidget(['胸','背中','腕','肩','脚','腹',], '部位'),
                   ],
                 ),
