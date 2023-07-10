@@ -50,12 +50,12 @@ final memosProvider = AutoDisposeNotifierProvider<Memos, List<Memo>>.internal(
 );
 
 typedef _$Memos = AutoDisposeNotifier<List<Memo>>;
-String _$dropDownButtonHash() => r'5d0d80875493daf5a901b14798e7d34b5f7ee613';
+String _$dropDownButtonHash() => r'7ad4fb70291375916e86754a8695845676424c16';
 
 /// See also [DropDownButton].
 @ProviderFor(DropDownButton)
 final dropDownButtonProvider =
-    AutoDisposeNotifierProvider<DropDownButton, String>.internal(
+    AutoDisposeNotifierProvider<DropDownButton, DropDownButtonState>.internal(
   DropDownButton.new,
   name: r'dropDownButtonProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -65,5 +65,5 @@ final dropDownButtonProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$DropDownButton = AutoDisposeNotifier<String>;
+typedef _$DropDownButton = AutoDisposeNotifier<DropDownButtonState>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions

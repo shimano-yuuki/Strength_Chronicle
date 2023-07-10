@@ -40,7 +40,7 @@ class BottomNavigation extends ConsumerWidget {
         itemCount: _screenIcon.length,
         activeIndex: selectedIndex,
         gapLocation: GapLocation.none,
-        splashColor: Colors.deepOrange,
+        splashColor: Colors.orange,
         onTap: (int index) {
           ref
               .read(selectedBottomNavigationProvider.notifier)
