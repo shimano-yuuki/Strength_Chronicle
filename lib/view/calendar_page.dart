@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import '../app.dart';
 import '../view_model/calendar_notifier.dart';
 
 class CalendarPage extends ConsumerWidget {
@@ -33,7 +34,15 @@ class CalendarPage extends ConsumerWidget {
     }
 
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          'カレンダー',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        centerTitle: true,
+        elevation: 5,
+      ),
+      drawer: DrawerWidget(),
       body: Column(
         children: [
           SizedBox(height: 10),
