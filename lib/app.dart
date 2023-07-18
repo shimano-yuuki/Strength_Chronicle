@@ -58,3 +58,39 @@ class BottomNavigation extends ConsumerWidget {
     );
   }
 }
+
+class DrawerWidget extends ConsumerWidget {
+  const DrawerWidget({super.key});
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    ListTile listTileWidget(String title, int index){
+      return ListTile(
+        title: Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ),
+        onTap: () {
+          final selectedIndex  = ref.watch(selectedBottomNavigationProvider);
+          if (selectedIndex == index) {
+            Navigator.pop(context);
+          } else {
+            ref.read(selectedBottomNavigationProvider.notifier).changeSelectedIndex(index);
+          }
+        },
+      );
+    }
+
+    return Drawer(
+      child: ListView(
+        children: [
+          listTileWidget('メモページ',0),
+          listTileWidget('カレンダー',1),
+          listTileWidget('日記',2),
+        ],
+      ),
+    );
+  }
+}
+
