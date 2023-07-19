@@ -22,6 +22,9 @@ class TextFromField extends _$TextFromField {
   void changeText(String text){
     state = text;
   }
+  void clearText(){
+    state = '';
+  }
 }
 
 

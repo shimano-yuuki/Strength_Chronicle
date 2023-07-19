@@ -9,14 +9,11 @@ import 'package:workout_app/view_model/memo_notifier.dart';
 class MemoPage extends ConsumerWidget {
   const MemoPage({Key? key}) : super(key: key);
 
-
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     final appBar = AppBar(
       title: Text(
-        '種目名',
+        '種目メモ',
         style: TextStyle(fontWeight: FontWeight.bold),
       ),
       centerTitle: true,
@@ -41,55 +38,51 @@ class MemoPage extends ConsumerWidget {
           right: 16.0,
           child: DragTarget<Memo>(
             builder: (context, candidateData, rejectedData) {
-              return GestureDetector(
-                onTap: () {
-                  showDialog(
-                    context: context,
-                    barrierDismissible: true,
-                    builder: (_) {
-                      return AlertDialog(
-                        title: Text('確認'),
-                        content: Text('本当に削除しますか？'),
-                        actions: <Widget>[
-                          TextButton(
-                            child: Text('キャンセル'),
-                            onPressed: () => Navigator.of(context).pop(),
-                          ),
-                          TextButton(
-                            child: Text('削除'),
-                            onPressed: () {
-                              // ref.read(memosProvider.notifier).removeMemo(data.id);
-                              Navigator.of(context).pop();
-                            },
-                          ),
-                        ],
-                      );
-                    },
-                  );
-                },
-                child: Container(
-                  width: 56.0,
-                  height: 56.0,
-                  decoration: BoxDecoration(
-                    color: Colors.red,
-                    shape: BoxShape.circle,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black.withOpacity(0.3),
-                        offset: Offset(0, 2),
-                        blurRadius: 4.0,
-                      ),
-                    ],
-                  ),
-                  child: Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                  ),
+              return Container(
+                width: 56.0,
+                height: 56.0,
+                decoration: BoxDecoration(
+                  color: Colors.red,
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      offset: Offset(0, 2),
+                      blurRadius: 4.0,
+                    ),
+                  ],
+                ),
+                child: Icon(
+                  Icons.delete,
+                  color: Colors.white,
                 ),
               );
             },
             onAccept: (data) {
-              ref.read(memosProvider.notifier).removeMemo(data.id);
+              showDialog(
+                context: context,
+                barrierDismissible: true,
+                builder: (_) {
+                  return AlertDialog(
+                    title: Text('確認'),
+                    content: Text('本当に削除しますか？'),
+                    actions: <Widget>[
+                      TextButton(
+                        child: Text('キャンセル'),
+                        onPressed: () => Navigator.of(context).pop(),
+                      ),
+                      TextButton(
+                        child: Text('削除'),
+                        onPressed: () {
+                          ref.read(memosProvider.notifier).removeMemo(data.id);
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ],
+                  );
+                },
+              );
+              // ref.read(memosProvider.notifier).removeMemo(data.id);
             },
           ),
         ),
@@ -139,7 +132,7 @@ class MemoPage extends ConsumerWidget {
         borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
       ),
       builder: (builder) {
-        return const BottomSheetWidget();
+        return BottomSheetWidget();
       },
     );
   }
