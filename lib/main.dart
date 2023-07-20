@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'StrengthChronicle',
       theme: ThemeData(
         primarySwatch: Colors.orange,
+        fontFamily: 'Noto_Sans_JP',
         appBarTheme: AppBarTheme(
           backgroundColor: Colors.white
         )
