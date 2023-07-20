@@ -20,7 +20,7 @@ final visibleProvider = AutoDisposeNotifierProvider<Visible, bool>.internal(
 );
 
 typedef _$Visible = AutoDisposeNotifier<bool>;
-String _$textFromFieldHash() => r'313a1e0ca94b319006d843613a736669c7148a1e';
+String _$textFromFieldHash() => r'a979b1cecaf5c4f3f992d49983d4ed06b2177e8b';
 
 /// See also [TextFromField].
 @ProviderFor(TextFromField)
@@ -50,7 +50,7 @@ final memosProvider = AutoDisposeNotifierProvider<Memos, List<Memo>>.internal(
 );
 
 typedef _$Memos = AutoDisposeNotifier<List<Memo>>;
-String _$dropDownButtonHash() => r'7ad4fb70291375916e86754a8695845676424c16';
+String _$dropDownButtonHash() => r'1d5109ea3681abd14cc2792cc28e48ebbeecec5f';
 
 /// See also [DropDownButton].
 @ProviderFor(DropDownButton)
