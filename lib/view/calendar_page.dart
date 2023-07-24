@@ -54,6 +54,7 @@ class CalendarPage extends ConsumerWidget {
       ),
       drawer: DrawerWidget(),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 10),
           TableCalendar(
@@ -248,7 +249,15 @@ class CalendarPage extends ConsumerWidget {
           ),
 
           //予定をリスト形式で表示
-          SizedBox(height: 30),
+          SizedBox(height: 20),
+          Padding(
+            padding: EdgeInsets.only(left: 10),
+            child: Text(
+              "${selectedDay.month}月${selectedDay.day}日の予定",
+              style: TextStyle(fontSize: 25),
+            ),
+          ),
+          SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
               shrinkWrap: true,
