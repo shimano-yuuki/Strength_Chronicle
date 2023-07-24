@@ -18,7 +18,16 @@ class CalendarPage extends ConsumerWidget {
       DateTime.now().add(Duration(days: 0)): ['胸', '背中'],
       DateTime.now().add(Duration(days: 2)): ['胸', '背中'],
       DateTime.now().add(Duration(days: 3)): ['胸'],
-      DateTime.now().add(Duration(days: 4)): ['胸', '胸', '胸'],
+      DateTime.now().add(Duration(days: 4)): [
+        '胸',
+        '胸',
+        '胸',
+        '胸',
+        '胸',
+        '胸',
+        '郁子',
+        '今日は朝からジムに行き、背中と二頭筋のトレーニングを中心に行った。レットプルダウンとバーベルカールをメインに、全体的に筋力をアップさせることを目指した。日が昇るにつれて、ジムの中もエネルギーに満ちていった。今日のトレーニングは、自己ベストを更新した達成感と共に終えることができた。体は疲れているが、心は満たされている。明日もまた、自分自身に挑戦していこうと思う。'
+      ],
     };
     int getHashCode(DateTime key) {
       return key.day * 1000000 + key.month * 10000 + key.year;
@@ -33,6 +42,7 @@ class CalendarPage extends ConsumerWidget {
       return _events[day] ?? [];
     }
 
+    List selectedEvents = getEvent(selectedDay);
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -47,12 +57,10 @@ class CalendarPage extends ConsumerWidget {
         children: [
           SizedBox(height: 10),
           TableCalendar(
-            //土日と平日のカラーの指定
+            //土日と平日のフォントサイズの指定
             daysOfWeekStyle: DaysOfWeekStyle(
-              weekdayStyle:
-                  TextStyle().copyWith(fontSize: 10.0, color: Colors.black),
-              weekendStyle:
-                  TextStyle().copyWith(fontSize: 10.0, color: Colors.orange),
+              weekdayStyle: TextStyle().copyWith(fontSize: 10.0),
+              weekendStyle: TextStyle().copyWith(fontSize: 10.0),
             ),
             headerStyle: const HeaderStyle(
               formatButtonVisible: false,
@@ -235,6 +243,68 @@ class CalendarPage extends ConsumerWidget {
                         ),
                       ),
                     ));
+              },
+            ),
+          ),
+
+          //予定をリスト形式で表示
+          SizedBox(height: 30),
+          Expanded(
+            child: ListView.builder(
+              shrinkWrap: true,
+              itemCount: selectedEvents.length,
+              itemBuilder: (context, index) {
+                return Column(children: [
+                  Row(children: [
+                    SizedBox(width: 15),
+                    Text("11:20"),
+                    SizedBox(width: 10),
+                    Container(
+                      width: 368,
+                      decoration: const BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: Colors.black,
+                            width: 0.1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ]),
+                  Material(
+                    color: Colors.transparent, // InkWellのリップルエフェクトを明確に表示するため
+                    child: InkWell(
+                      onTap: () {
+                        print('Button tapped!');
+                        // ボタンがタップされたときの振る舞いをここに書く
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 70),
+                        child: Column(children: [
+                          SizedBox(
+                            height: 30,
+                          ),
+                          ConstrainedBox(
+                            constraints: BoxConstraints(
+                              minHeight: 0,
+                            ),
+                            child: Expanded(
+                              child: Center(
+                                child: Text(
+                                  selectedEvents[index],
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                        ]),
+                      ),
+                    ),
+                  ),
+                ]);
               },
             ),
           ),
