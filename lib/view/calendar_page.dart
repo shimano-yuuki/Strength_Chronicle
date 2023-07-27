@@ -6,6 +6,7 @@ import 'package:table_calendar/table_calendar.dart';
 
 import '../app.dart';
 import '../view_model/calendar_notifier.dart';
+import 'calendar_detail_page.dart';
 
 class CalendarPage extends ConsumerWidget {
   const CalendarPage({super.key});
@@ -284,8 +285,13 @@ class CalendarPage extends ConsumerWidget {
                     color: Colors.transparent, // InkWellのリップルエフェクトを明確に表示するため
                     child: InkWell(
                       onTap: () {
-                        print('Button tapped!');
-                        // ボタンがタップされたときの振る舞いをここに書く
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CalendarDetailPage(
+                                    CalendarContant: selectedEvents[index],
+                                  )),
+                        );
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 70),
