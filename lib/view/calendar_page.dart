@@ -16,6 +16,7 @@ class CalendarPage extends ConsumerWidget {
     DateTime selectedDay = ref.watch(daySelectedProvider);
     DateTime focusedDay = ref.watch(daySelectedProvider);
     Map<DateTime, List> _eventsList = {
+      DateTime.now().add(Duration(days: -3)): ['胸', '背中'],
       DateTime.now().add(Duration(days: 0)): ['胸', '背中'],
       DateTime.now().add(Duration(days: 2)): ['胸', '背中'],
       DateTime.now().add(Duration(days: 3)): ['胸'],
@@ -84,8 +85,13 @@ class CalendarPage extends ConsumerWidget {
             //カレンダーで表示する日付のフォントや位置の指定
             calendarBuilders: CalendarBuilders(
               todayBuilder: (context, day, focusedDay) {
-                return AnimatedContainer(
-                    duration: const Duration(milliseconds: 250),
+                return Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 0.1,
+                      ),
+                    ),
                     alignment: Alignment.topCenter,
                     child: Padding(
                       padding: EdgeInsets.only(top: 2),
@@ -98,7 +104,8 @@ class CalendarPage extends ConsumerWidget {
                           child: Text(
                             day.day.toString(),
                             style: TextStyle(
-                              fontSize: 10,
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
                               color: Colors.white,
                             ),
                           ),
@@ -109,12 +116,11 @@ class CalendarPage extends ConsumerWidget {
               //セルに線をつけたり、セルの文字の位置や配置の指定
               defaultBuilder:
                   (BuildContext context, DateTime day, DateTime focusedDay) {
-                return AnimatedContainer(
-                    duration: const Duration(milliseconds: 250),
+                return Container(
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.grey,
-                        width: 0.05,
+                        width: 0.04,
                       ),
                     ),
                     alignment: Alignment.topCenter,
@@ -147,7 +153,7 @@ class CalendarPage extends ConsumerWidget {
                               top: 6,
                               child: Container(
                                 width: 59,
-                                height: 13,
+                                height: 16,
                                 color: Colors.blue,
                                 child: Center(
                                   child: Text(
@@ -165,7 +171,7 @@ class CalendarPage extends ConsumerWidget {
                               top: 21,
                               child: Container(
                                 width: 59,
-                                height: 13,
+                                height: 16,
                                 color: Colors.red,
                                 child: Center(
                                   child: Text(
@@ -182,14 +188,15 @@ class CalendarPage extends ConsumerWidget {
                       ),
                     ),
                   );
+                } else {
+                  return Container();
                 }
-                return Container();
               },
+
               //特定の日付を選択した時のセルの指定
               selectedBuilder:
                   (BuildContext context, DateTime day, DateTime focusedDay) {
-                return AnimatedContainer(
-                    duration: const Duration(milliseconds: 250),
+                return Container(
                     color: Color.fromARGB(255, 223, 221, 221),
                     alignment: Alignment.topCenter,
                     child: isSameDay(selectedDay, DateTime.now())
@@ -204,7 +211,8 @@ class CalendarPage extends ConsumerWidget {
                                 child: Text(
                                   day.day.toString(),
                                   style: TextStyle(
-                                    fontSize: 12,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 9,
                                     color: Colors.white,
                                   ),
                                 ),
@@ -226,25 +234,36 @@ class CalendarPage extends ConsumerWidget {
               //カレンダーに表示される別の月の日付の指定
               outsideBuilder:
                   (BuildContext context, DateTime day, DateTime focusedDay) {
-                return AnimatedContainer(
-                    duration: const Duration(milliseconds: 250),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.grey,
-                        width: 0.05,
-                      ),
-                    ),
-                    alignment: Alignment.topCenter,
-                    child: Padding(
-                      padding: EdgeInsets.only(top: 2),
-                      child: Text(
-                        day.day.toString(),
-                        style: TextStyle(
-                          fontSize: 10,
+                if (day.month != focusedDay.month) {
+                  return GestureDetector(
+                    onTap: () {
+                      print("a");
+                      ref
+                          .read(daySelectedProvider.notifier)
+                          .changeSelectedDay(focusedDay, selectedDay);
+                    },
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 250),
+                      decoration: BoxDecoration(
+                        border: Border.all(
                           color: Colors.grey,
+                          width: 0.1,
                         ),
                       ),
-                    ));
+                      alignment: Alignment.topCenter,
+                      child: Padding(
+                        padding: EdgeInsets.only(top: 5),
+                        child: Text(
+                          day.day.toString(),
+                          style: TextStyle(
+                            fontSize: 9,
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                }
               },
             ),
           ),
@@ -260,68 +279,78 @@ class CalendarPage extends ConsumerWidget {
           ),
           SizedBox(height: 20),
           Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              itemCount: selectedEvents.length,
-              itemBuilder: (context, index) {
-                return Column(children: [
-                  Row(children: [
-                    SizedBox(width: 15),
-                    Text("11:20"),
-                    SizedBox(width: 10),
-                    Container(
-                      width: 368,
-                      decoration: const BoxDecoration(
-                        border: Border(
-                          bottom: BorderSide(
-                            color: Colors.black,
-                            width: 0.1,
-                          ),
-                        ),
-                      ),
+            child: selectedEvents
+                    .isEmpty // check if there is no event for the selected day
+                ? Center(
+                    child: Text(
+                      '予定がありません',
+                      style: TextStyle(fontSize: 16, color: Colors.grey),
                     ),
-                  ]),
-                  Material(
-                    color: Colors.transparent, // InkWellのリップルエフェクトを明確に表示するため
-                    child: InkWell(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CalendarDetailPage(
-                                    CalendarContant: selectedEvents[index],
-                                  )),
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 70),
-                        child: Column(children: [
-                          SizedBox(
-                            height: 30,
-                          ),
-                          ConstrainedBox(
-                            constraints: BoxConstraints(
-                              minHeight: 0,
-                            ),
-                            child: Expanded(
-                              child: Center(
-                                child: Text(
-                                  selectedEvents[index],
-                                  style: TextStyle(fontSize: 16),
+                  )
+                : ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: selectedEvents.length,
+                    itemBuilder: (context, index) {
+                      return Column(children: [
+                        Row(children: [
+                          SizedBox(width: 15),
+                          Text("11:20"),
+                          SizedBox(width: 10),
+                          Container(
+                            width: 368,
+                            decoration: const BoxDecoration(
+                              border: Border(
+                                bottom: BorderSide(
+                                  color: Colors.black,
+                                  width: 0.1,
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            height: 30,
-                          ),
                         ]),
-                      ),
-                    ),
+                        Material(
+                          color: Colors.transparent,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CalendarDetailPage(
+                                          CalendarContant:
+                                              selectedEvents[index],
+                                        )),
+                              );
+                            },
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 70),
+                              child: Column(children: [
+                                SizedBox(
+                                  height: 30,
+                                ),
+                                ConstrainedBox(
+                                  constraints: BoxConstraints(
+                                    minHeight: 0,
+                                  ),
+                                  child: Expanded(
+                                    child: Center(
+                                      child: Text(
+                                        selectedEvents[index],
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 30,
+                                ),
+                              ]),
+                            ),
+                          ),
+                        ),
+                      ]);
+                    },
                   ),
-                ]);
-              },
-            ),
           ),
         ],
       ),
