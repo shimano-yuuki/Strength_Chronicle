@@ -234,36 +234,24 @@ class CalendarPage extends ConsumerWidget {
               //カレンダーに表示される別の月の日付の指定
               outsideBuilder:
                   (BuildContext context, DateTime day, DateTime focusedDay) {
-                if (day.month != focusedDay.month) {
-                  return GestureDetector(
-                    onTap: () {
-                      print("a");
-                      ref
-                          .read(daySelectedProvider.notifier)
-                          .changeSelectedDay(focusedDay, selectedDay);
-                    },
-                    child: AnimatedContainer(
-                      duration: const Duration(milliseconds: 250),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
-                          width: 0.1,
-                        ),
-                      ),
-                      alignment: Alignment.topCenter,
-                      child: Padding(
-                        padding: EdgeInsets.only(top: 5),
-                        child: Text(
-                          day.day.toString(),
-                          style: TextStyle(
-                            fontSize: 9,
-                            color: Colors.grey,
-                          ),
-                        ),
+                return Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.grey,
+                        width: 0.05,
                       ),
                     ),
-                  );
-                }
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 2),
+                      child: Text(
+                        day.day.toString(),
+                        style: TextStyle(
+                          fontSize: 10,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ));
               },
             ),
           ),
