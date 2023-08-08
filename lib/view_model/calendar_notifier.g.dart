@@ -6,7 +6,7 @@ part of 'calendar_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$daySelectedHash() => r'49226b7ce1fd1a7af38ec2d5942ce6d35bd8ef22';
+String _$daySelectedHash() => r'74e7c7dc6cedcfd9038317a8cd5998d57c2bf596';
 
 /// See also [DaySelected].
 @ProviderFor(DaySelected)

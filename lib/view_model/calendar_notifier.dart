@@ -10,8 +10,6 @@ class DaySelected extends _$DaySelected {
   }
 
   void changeSelectedDay(DateTime focusedDay, DateTime selectedDay) {
-    if (focusedDay == selectedDay) {
       state = selectedDay;
-    }
   }
 }
