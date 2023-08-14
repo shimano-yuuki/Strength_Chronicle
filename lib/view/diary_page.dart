@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:workout_app/view/diary_add_page.dart';
 
 import '../app.dart';
 
@@ -22,6 +23,12 @@ class DiaryPage extends ConsumerWidget {
       floatingActionButton:
       FloatingActionButton(
         onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => DiaryAddPage(
+                )),
+          );
           // Add your onPressed code here!
         },
         child: const Icon(Icons.add, color: Colors.white),
