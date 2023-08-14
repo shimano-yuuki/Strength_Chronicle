@@ -33,70 +33,62 @@ class MemoPage extends ConsumerWidget {
     );
     final floatingActionButton = Stack(
       children: [
-        Positioned(
-          bottom: 16.0,
-          right: 16.0,
-          child: DragTarget<Memo>(
-            builder: (context, candidateData, rejectedData) {
-              return Container(
-                width: 56.0,
-                height: 56.0,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  shape: BoxShape.circle,
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.3),
-                      offset: Offset(0, 2),
-                      blurRadius: 4.0,
+        DragTarget<Memo>(
+          builder: (context, candidateData, rejectedData) {
+            return Container(
+              width: 56.0,
+              height: 56.0,
+              decoration: BoxDecoration(
+                color: Colors.red,
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.3),
+                    offset: Offset(0, 2),
+                    blurRadius: 4.0,
+                  ),
+                ],
+              ),
+              child: Icon(
+                Icons.delete,
+                color: Colors.white,
+              ),
+            );
+          },
+          onAccept: (data) {
+            showDialog(
+              context: context,
+              barrierDismissible: true,
+              builder: (_) {
+                return AlertDialog(
+                  title: Text('確認'),
+                  content: Text('本当に削除しますか？'),
+                  actions: <Widget>[
+                    TextButton(
+                      child: Text('キャンセル'),
+                      onPressed: () => Navigator.of(context).pop(),
+                    ),
+                    TextButton(
+                      child: Text('削除'),
+                      onPressed: () {
+                        ref.read(memosProvider.notifier).removeMemo(data.id);
+                        Navigator.of(context).pop();
+                      },
                     ),
                   ],
-                ),
-                child: Icon(
-                  Icons.delete,
-                  color: Colors.white,
-                ),
-              );
-            },
-            onAccept: (data) {
-              showDialog(
-                context: context,
-                barrierDismissible: true,
-                builder: (_) {
-                  return AlertDialog(
-                    title: Text('確認'),
-                    content: Text('本当に削除しますか？'),
-                    actions: <Widget>[
-                      TextButton(
-                        child: Text('キャンセル'),
-                        onPressed: () => Navigator.of(context).pop(),
-                      ),
-                      TextButton(
-                        child: Text('削除'),
-                        onPressed: () {
-                          ref.read(memosProvider.notifier).removeMemo(data.id);
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ],
-                  );
-                },
-              );
-              // ref.read(memosProvider.notifier).removeMemo(data.id);
-            },
-          ),
-        ),
-        Positioned(
-          bottom: 16.0,
-          right: 16.0,
-          child: Visibility(
-            visible: ref.watch(visibleProvider),
-            child: FloatingActionButton(
-              onPressed: () {
-                _showBottomSheetMenu(context, ref);
+                );
               },
-              child: const Icon(Icons.add, color: Colors.white),
-            ),
+            );
+            // ref.read(memosProvider.notifier).removeMemo(data.id);
+          },
+        ),
+        Visibility(
+          visible: ref.watch(visibleProvider),
+          child: FloatingActionButton(
+            onPressed: () {
+              _showBottomSheetMenu(context, ref);
+            },
+            child: const Icon(Icons.add, color: Colors.white),
           ),
         ),
       ],
