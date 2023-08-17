@@ -71,7 +71,8 @@ class MemoPage extends ConsumerWidget {
                     TextButton(
                       child: Text('削除'),
                       onPressed: () {
-                        ref.read(memosProvider.notifier).removeMemo(data.id);
+                        ref.
+                        read(memosProvider.notifier).removeMemo(data.id);
                         Navigator.of(context).pop();
                       },
                     ),
