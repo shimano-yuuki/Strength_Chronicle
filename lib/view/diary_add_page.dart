@@ -8,6 +8,9 @@ class DiaryAddPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     DateTime now = DateTime.now();
     String formattedDate = "${now.month}月${now.day}日";
+    var diaryController = TextEditingController();
+    String diary;
+    List<Map<String,String>> contents=[];
     return Scaffold(
         appBar: AppBar(
           actions: [
@@ -21,6 +24,10 @@ class DiaryAddPage extends ConsumerWidget {
                 child: Center(child: Text('追加する',style: MyTextStyles.body.bold.white)),
               ),
               onTap: (){
+                diary = diaryController.text;
+                contents.add({formattedDate:diary});
+                 Navigator.pop(context);
+                 print(contents);
               },
                 ),
             )
@@ -43,6 +50,7 @@ class DiaryAddPage extends ConsumerWidget {
                     border: InputBorder.none,
                     hintText: '今日の筋トレはどうでしたか？',
                   ),
+                  controller: diaryController,
                   autofocus: true,
                 )
               ),
