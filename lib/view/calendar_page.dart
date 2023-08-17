@@ -284,13 +284,14 @@ class CalendarPage extends ConsumerWidget {
                           SizedBox(width: 15),
                           Text("11:20"),
                           SizedBox(width: 10),
-                          Container(
-                            width: 368,
-                            decoration: const BoxDecoration(
-                              border: Border(
-                                bottom: BorderSide(
-                                  color: Colors.black,
-                                  width: 0.1,
+                          Expanded(
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                border: Border(
+                                  bottom: BorderSide(
+                                    color: Colors.black,
+                                    width: 0.1,
+                                  ),
                                 ),
                               ),
                             ),
@@ -311,7 +312,7 @@ class CalendarPage extends ConsumerWidget {
                             },
                             child: Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 70),
+                                  const EdgeInsets.symmetric(horizontal: 50),
                               child: Column(children: [
                                 SizedBox(
                                   height: 30,
