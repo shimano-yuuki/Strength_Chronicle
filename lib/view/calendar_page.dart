@@ -131,54 +131,41 @@ class CalendarPage extends ConsumerWidget {
               },
               //イベントがある場合のセルの表示の仕方を指定
               markerBuilder: (context, date, events) {
-                if (events.isNotEmpty) {
-                  return Positioned(
-                    bottom: -12,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        shape: BoxShape.rectangle,
-                      ),
-                      height: 49,
-                      width: 59,
-                      child: Stack(
-                        children: [
-                          if (events.length >= 1)
-                            Positioned(
-                              top: 6,
-                              child: Container(
-                                width: 59,
-                                height: 16,
-                                color: Colors.blue,
-                                child: Center(
-                                  child: Text(
-                                    events[0].toString(),
-                                    style: MyTextStyles.label.small.white
-                                  ),
-                                ),
-                              ),
-                            ),
-                          if (events.length >= 2)
-                            Positioned(
-                              top: 21,
-                              child: Container(
-                                width: 59,
-                                height: 16,
-                                color: Colors.red,
-                                child: Center(
-                                  child: Text(
-                                    events[1].toString(),
-                                    style: MyTextStyles.label.small.white
-                                  ),
-                                ),
-                              ),
-                            ),
-                        ],
-                      ),
-                    ),
-                  );
-                } else {
-                  return Container();
-                }
+                // if (events.isNotEmpty) {
+                //   return Container(
+                //     decoration: BoxDecoration(
+                //       shape: BoxShape.rectangle,
+                //     ),
+                //     child: Column(
+                //       children: [
+                //         Expanded(child: Container()),
+                //         if (events.length >= 1)
+                //           Container(
+                //               color: Colors.blue,
+                //               child: Center(
+                //                 child: Text(
+                //                   events[0].toString(),
+                //                   style: MyTextStyles.label.small.white
+                //                 ),
+                //               ),
+                //             ),
+                //
+                //         if (events.length >= 2)
+                //           Container(
+                //             color: Colors.red,
+                //             child: Center(
+                //               child: Text(
+                //                 events[1].toString(),
+                //                 style: MyTextStyles.label.small.white
+                //               ),
+                //             ),
+                //           ),
+                //       ],
+                //     ),
+                //   );
+                // } else {
+                //   return Container();
+                // }
               },
 
               //特定の日付を選択した時のセルの指定
@@ -264,14 +251,8 @@ class CalendarPage extends ConsumerWidget {
                           SizedBox(width: 10),
                           Expanded(
                             child: Container(
-                              decoration: const BoxDecoration(
-                                border: Border(
-                                  bottom: BorderSide(
-                                    color: Colors.black,
-                                    width: 0.1,
-                                  ),
-                                ),
-                              ),
+                              height: 1,
+                              color: Colors.grey,
                             ),
                           ),
                         ]),
