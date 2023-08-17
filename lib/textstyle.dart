@@ -68,6 +68,7 @@ class _MyTextStyle extends TextStyle {
   _MyTextStyle get black => _MyTextStyle(copyWith(color: MyColors.black));
   _MyTextStyle get white => _MyTextStyle(copyWith(color: MyColors.white));
   _MyTextStyle get caution => _MyTextStyle(copyWith(color: MyColors.caution));
+  _MyTextStyle get grey => _MyTextStyle(copyWith(color: MyColors.grey));
 
   _MyTextStyle get bold => _MyTextStyle(copyWith(fontWeight: FontWeight.w700));
 }
@@ -90,5 +91,6 @@ class MyColors {
   static const Color black = Color(0xFF000000);
   static const Color white = Color(0xFFFFFFFF);
   static const Color caution = Color(0xFFFF0000);
+  static const Color grey = Color(0xFFB4B4B4);
 // 他のカスタムカラーもここに追加できます
 }

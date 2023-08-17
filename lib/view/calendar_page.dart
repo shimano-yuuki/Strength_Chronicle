@@ -3,6 +3,7 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
+import 'package:workout_app/textstyle.dart';
 
 import '../app.dart';
 import '../view_model/calendar_notifier.dart';
@@ -49,7 +50,7 @@ class CalendarPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           'カレンダー',
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: MyTextStyles.title.large.bold,
         ),
         centerTitle: true,
         elevation: 5,
@@ -62,8 +63,8 @@ class CalendarPage extends ConsumerWidget {
           TableCalendar(
             //土日と平日のフォントサイズの指定
             daysOfWeekStyle: DaysOfWeekStyle(
-              weekdayStyle: TextStyle().copyWith(fontSize: 10.0),
-              weekendStyle: TextStyle().copyWith(fontSize: 10.0),
+              weekdayStyle: MyTextStyles.label.small,
+              weekendStyle: MyTextStyles.label.small,
             ),
             headerStyle: const HeaderStyle(
               formatButtonVisible: false,
@@ -96,18 +97,14 @@ class CalendarPage extends ConsumerWidget {
                     child: Padding(
                       padding: EdgeInsets.only(top: 2),
                       child: Container(
-                        height: 16,
-                        width: 16,
+                        height: 17,
+                        width: 17,
                         decoration: BoxDecoration(
                             color: Colors.black, shape: BoxShape.circle),
                         child: Center(
                           child: Text(
                             day.day.toString(),
-                            style: TextStyle(
-                              fontSize: 9,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
+                            style: MyTextStyles.label.small.bold.white
                           ),
                         ),
                       ),
@@ -128,10 +125,7 @@ class CalendarPage extends ConsumerWidget {
                       padding: EdgeInsets.only(top: 2),
                       child: Text(
                         day.day.toString(),
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.black,
-                        ),
+                        style: MyTextStyles.label.small
                       ),
                     ));
               },
@@ -158,10 +152,7 @@ class CalendarPage extends ConsumerWidget {
                                 child: Center(
                                   child: Text(
                                     events[0].toString(),
-                                    style: TextStyle().copyWith(
-                                      fontSize: 10,
-                                      color: Colors.white,
-                                    ),
+                                    style: MyTextStyles.label.small.white
                                   ),
                                 ),
                               ),
@@ -176,10 +167,7 @@ class CalendarPage extends ConsumerWidget {
                                 child: Center(
                                   child: Text(
                                     events[1].toString(),
-                                    style: TextStyle().copyWith(
-                                      fontSize: 10,
-                                      color: Colors.white,
-                                    ),
+                                    style: MyTextStyles.label.small.white
                                   ),
                                 ),
                               ),
@@ -210,11 +198,7 @@ class CalendarPage extends ConsumerWidget {
                               child: Center(
                                 child: Text(
                                   day.day.toString(),
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 9,
-                                    color: Colors.white,
-                                  ),
+                                  style: MyTextStyles.label.small.bold.white
                                 ),
                               ),
                             ),
@@ -223,10 +207,7 @@ class CalendarPage extends ConsumerWidget {
                             padding: EdgeInsets.only(top: 2),
                             child: Text(
                               day.day.toString(),
-                              style: TextStyle(
-                                fontSize: 12,
-                                color: Colors.black,
-                              ),
+                              style:MyTextStyles.label.small.black
                             ),
                           ));
               },
@@ -246,10 +227,7 @@ class CalendarPage extends ConsumerWidget {
                       padding: EdgeInsets.only(top: 2),
                       child: Text(
                         day.day.toString(),
-                        style: TextStyle(
-                          fontSize: 10,
-                          color: Colors.grey,
-                        ),
+                        style: MyTextStyles.label.small.grey
                       ),
                     ));
               },
@@ -262,7 +240,7 @@ class CalendarPage extends ConsumerWidget {
             padding: EdgeInsets.only(left: 10),
             child: Text(
               "${selectedDay.month}月${selectedDay.day}日の予定",
-              style: TextStyle(fontSize: 25),
+              style: MyTextStyles.title.large,
             ),
           ),
           SizedBox(height: 20),
@@ -272,7 +250,7 @@ class CalendarPage extends ConsumerWidget {
                 ? Center(
                     child: Text(
                       '予定がありません',
-                      style: TextStyle(fontSize: 16, color: Colors.grey),
+                      style: MyTextStyles.body.grey,
                     ),
                   )
                 : ListView.builder(
@@ -282,7 +260,7 @@ class CalendarPage extends ConsumerWidget {
                       return Column(children: [
                         Row(children: [
                           SizedBox(width: 15),
-                          Text("11:20"),
+                          Text("11:20",style: MyTextStyles.body,),
                           SizedBox(width: 10),
                           Expanded(
                             child: Container(
@@ -325,7 +303,7 @@ class CalendarPage extends ConsumerWidget {
                                     child: Center(
                                       child: Text(
                                         selectedEvents[index],
-                                        style: TextStyle(fontSize: 16),
+                                        style: MyTextStyles.body.large,
                                       ),
                                     ),
                                   ),
