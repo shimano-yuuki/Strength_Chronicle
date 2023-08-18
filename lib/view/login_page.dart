@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:workout_app/textstyle.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -22,21 +23,27 @@ class LoginPage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
-                        child: LoginIconWidget(
-                          logoId: 'assets/images/google-logo.svg',
-                          size: 35,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: LoginIconWidget(
+                            logoId: 'assets/images/google-logo.svg',
+                          ),
                         ),
                       ),
                       Expanded(
-                        child: LoginIconWidget(
-                          logoId: 'assets/images/x-logo.svg',
-                          size: 35,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: LoginIconWidget(
+                            logoId: 'assets/images/x-logo.svg',
+                          ),
                         ),
                       ),
                       Expanded(
-                        child: LoginIconWidget(
-                          logoId: 'assets/images/apple-logo.svg',
-                          size: 35,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: LoginIconWidget(
+                            logoId: 'assets/images/apple-logo.svg',
+                          ),
                         ),
                       ),
                     ],
@@ -57,6 +64,7 @@ class LoginPage extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 14),
                         child: Text(
                           'または',
+                          style: MyTextStyles.label,
                         ),
                       ),
                       Expanded(
@@ -88,6 +96,16 @@ class LoginPage extends StatelessWidget {
                         prefixIcon: Icon(Icons.lock)),
                   ),
                   SizedBox(
+                    height: 10,
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: Text(
+                      'パスワードをお忘れのかた',
+                      style: MyTextStyles.label.blue,
+                    ),
+                  ),
+                  SizedBox(
                     height: 60,
                   ),
                   InkWell(
@@ -101,7 +119,7 @@ class LoginPage extends StatelessWidget {
                       child: Center(
                         child: Text(
                           'ログイン',
-                          style: TextStyle(color: Colors.white),
+                          style: MyTextStyles.body.bold.white,
                         ),
                       ),
                     ),
@@ -109,7 +127,22 @@ class LoginPage extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Text('パスワードを忘れた'),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        'アカウントをお持ちでない方。',
+                        style: MyTextStyles.label,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        '新規登録',
+                        style: MyTextStyles.label.blue,
+                      ),
+                    ],
+                  ),
                   SizedBox(
                     height: 60,
                   ),
@@ -124,37 +157,36 @@ class LoginPage extends StatelessWidget {
 }
 
 class LoginIconWidget extends StatelessWidget {
-  const LoginIconWidget({super.key, required this.logoId, required this.size});
+  const LoginIconWidget({
+    super.key,
+    required this.logoId,
+  });
 
   final String logoId;
-  final double size;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: 80,
-        height: 80,
-        decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey,
-                spreadRadius: 1,
-                blurRadius: 5,
-                offset: Offset(1, 1),
-              )
-            ]),
-        child: FittedBox(
-          fit: BoxFit.scaleDown,
-          child: SvgPicture.asset(
-            logoId,
-            fit: BoxFit.contain,
-            width: size,
-            height: size,
-          ),
+    return Container(
+      width: 80,
+      height: 80,
+      decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey,
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(1, 1),
+            )
+          ]),
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: SvgPicture.asset(
+          logoId,
+          fit: BoxFit.contain,
+          width: 35,
+          height: 35,
         ),
       ),
     );
