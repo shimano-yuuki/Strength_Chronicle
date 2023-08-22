@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -102,10 +103,8 @@ class CalendarPage extends ConsumerWidget {
                         decoration: BoxDecoration(
                             color: Colors.black, shape: BoxShape.circle),
                         child: Center(
-                          child: Text(
-                            day.day.toString(),
-                            style: MyTextStyles.label.small.bold.white
-                          ),
+                          child: Text(day.day.toString(),
+                              style: MyTextStyles.label.small.bold.white),
                         ),
                       ),
                     ));
@@ -123,49 +122,31 @@ class CalendarPage extends ConsumerWidget {
                     alignment: Alignment.topCenter,
                     child: Padding(
                       padding: EdgeInsets.only(top: 2),
-                      child: Text(
-                        day.day.toString(),
-                        style: MyTextStyles.label.small
-                      ),
+                      child: Text(day.day.toString(),
+                          style: MyTextStyles.label.small),
                     ));
               },
               //イベントがある場合のセルの表示の仕方を指定
               markerBuilder: (context, date, events) {
-                // if (events.isNotEmpty) {
-                //   return Container(
-                //     decoration: BoxDecoration(
-                //       shape: BoxShape.rectangle,
-                //     ),
-                //     child: Column(
-                //       children: [
-                //         Expanded(child: Container()),
-                //         if (events.length >= 1)
-                //           Container(
-                //               color: Colors.blue,
-                //               child: Center(
-                //                 child: Text(
-                //                   events[0].toString(),
-                //                   style: MyTextStyles.label.small.white
-                //                 ),
-                //               ),
-                //             ),
-                //
-                //         if (events.length >= 2)
-                //           Container(
-                //             color: Colors.red,
-                //             child: Center(
-                //               child: Text(
-                //                 events[1].toString(),
-                //                 style: MyTextStyles.label.small.white
-                //               ),
-                //             ),
-                //           ),
-                //       ],
-                //     ),
-                //   );
-                // } else {
-                //   return Container();
-                // }
+                if (events.isEmpty) return SizedBox();
+                return ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: events.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        margin: const EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.all(1),
+                        child: Container(
+                          // height: 7,
+                          width: 5,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: Colors.primaries[
+                                  Random().nextInt(Colors.primaries.length)]),
+                        ),
+                      );
+                    });
               },
 
               //特定の日付を選択した時のセルの指定
@@ -183,19 +164,15 @@ class CalendarPage extends ConsumerWidget {
                               decoration: BoxDecoration(
                                   color: Colors.black, shape: BoxShape.circle),
                               child: Center(
-                                child: Text(
-                                  day.day.toString(),
-                                  style: MyTextStyles.label.small.bold.white
-                                ),
+                                child: Text(day.day.toString(),
+                                    style: MyTextStyles.label.small.bold.white),
                               ),
                             ),
                           )
                         : Padding(
                             padding: EdgeInsets.only(top: 2),
-                            child: Text(
-                              day.day.toString(),
-                              style:MyTextStyles.label.small.black
-                            ),
+                            child: Text(day.day.toString(),
+                                style: MyTextStyles.label.small.black),
                           ));
               },
 
@@ -212,10 +189,8 @@ class CalendarPage extends ConsumerWidget {
                     alignment: Alignment.topCenter,
                     child: Padding(
                       padding: EdgeInsets.only(top: 2),
-                      child: Text(
-                        day.day.toString(),
-                        style: MyTextStyles.label.small.grey
-                      ),
+                      child: Text(day.day.toString(),
+                          style: MyTextStyles.label.small.grey),
                     ));
               },
             ),
@@ -247,7 +222,10 @@ class CalendarPage extends ConsumerWidget {
                       return Column(children: [
                         Row(children: [
                           SizedBox(width: 15),
-                          Text("11:20",style: MyTextStyles.body,),
+                          Text(
+                            "11:20",
+                            style: MyTextStyles.body,
+                          ),
                           SizedBox(width: 10),
                           Expanded(
                             child: Container(
