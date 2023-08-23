@@ -13,6 +13,7 @@ import 'calendar_detail_page.dart';
 class CalendarPage extends ConsumerWidget {
   const CalendarPage({super.key});
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     DateTime selectedDay = ref.watch(daySelectedProvider);
