@@ -20,7 +20,7 @@ class MyTextStyles {
   }
 
   static final title = _MyTextStyleSet(
-    large: _toStyle(22, 28, FontWeight.w400, 0),
+    large: _toStyle(30, 28, FontWeight.w400, 0),
     medium: _toStyle(16, 24, FontWeight.w500, 0.15),
     small: _toStyle(14, 20, FontWeight.w500, 0.1),
   );
