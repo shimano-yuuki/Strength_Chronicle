@@ -2,6 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:workout_app/textstyle.dart';
 import 'package:workout_app/view/calendar_page.dart';
 import 'package:workout_app/view/diary_page.dart';
 import 'package:workout_app/view/login_page.dart';
@@ -24,7 +25,7 @@ class SelectedBottomNavigation extends _$SelectedBottomNavigation {
 class BottomNavigation extends ConsumerWidget {
   const BottomNavigation({Key? key}) : super(key: key);
 
-  static final _screen = [LoginPage(), CalendarPage(), DiaryPage()];
+  static final _screen = [MemoPage(), CalendarPage(), DiaryPage()];
   static final _screenIcon = [
     Icons.edit_note,
     Icons.event,
@@ -69,7 +70,7 @@ class DrawerWidget extends ConsumerWidget {
       return ListTile(
         title: Text(
           title,
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: MyTextStyles.body.bold,
         ),
         onTap: () {
           final selectedIndex = ref.watch(selectedBottomNavigationProvider);
@@ -87,6 +88,18 @@ class DrawerWidget extends ConsumerWidget {
     return Drawer(
       child: ListView(
         children: [
+          ListTile(
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => LoginPage()));
+            },
+            leading: Icon(Icons.exit_to_app),
+            title: Text(
+              'ログアウト',
+              style: MyTextStyles.body.bold,
+            ),
+          ),
+          Divider(height: 1),
           listTileWidget('メモページ', 0),
           listTileWidget('カレンダー', 1),
           listTileWidget('日記', 2),

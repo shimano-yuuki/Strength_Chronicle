@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:workout_app/app.dart';
+import 'package:workout_app/view/login_page.dart';
 
 
 void main() {
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.white
         )
       ),
-      home: BottomNavigation(),
+      home: LoginPage(),
     );
   }
 }
