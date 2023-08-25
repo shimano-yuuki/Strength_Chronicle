@@ -44,6 +44,7 @@ dependencies:
   table_calendar: ^3.0.9
   flutter_datetime_picker_plus: ^2.0.1
   flutter_svg: ^2.0.7
+  firebase_auth: ^4.8.0
 
 dev_dependencies:
   flutter_test:
