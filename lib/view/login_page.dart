@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:workout_app/textstyle.dart';
+import 'package:workout_app/view/signup_page.dart';
+import 'package:workout_app/view/widget/text_form.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -19,6 +21,13 @@ class LoginPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
+                  Text(
+                    'Login',
+                    style: MyTextStyles.title.large.bold,
+                  ),
+                  SizedBox(
+                    height: 60,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -78,22 +87,17 @@ class LoginPage extends StatelessWidget {
                   SizedBox(
                     height: 60,
                   ),
-                  TextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                        labelText: 'メールアドレス',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.mail)),
+                  TextFormWidget(
+                    icon: Icon(Icons.mail),
+                    labelText: 'メールアドレス',
                   ),
                   SizedBox(
                     height: 20,
                   ),
-                  TextFormField(
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                        labelText: 'パスワード',
-                        border: OutlineInputBorder(),
-                        prefixIcon: Icon(Icons.lock)),
+                  TextFormWidget(
+                    icon: Icon(Icons.lock),
+                    labelText: 'パスワード',
+                    obscure: true,
                   ),
                   SizedBox(
                     height: 10,
@@ -127,19 +131,27 @@ class LoginPage extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
+                  SizedBox(
+                    height: 6,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'アカウントをお持ちでない方。',
+                        'すでにアカウントをお持ちの方は',
                         style: MyTextStyles.label,
                       ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text(
-                        '新規登録',
-                        style: MyTextStyles.label.blue,
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SignUpPage()));
+                        },
+                        child: Text(
+                          'こちら',
+                          style: MyTextStyles.label.blue,
+                        ),
                       ),
                     ],
                   ),
