@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:workout_app/textstyle.dart';
-import 'package:workout_app/view/calendar_page.dart';
-import 'package:workout_app/view/diary_page.dart';
+import 'package:workout_app/view/calender/calendar_page.dart';
+import 'package:workout_app/view/diary/diary_page.dart';
 import 'package:workout_app/view/login_page.dart';
-import 'package:workout_app/view/memo_page.dart';
+import 'package:workout_app/view/memo/memo_page.dart';
 
 part 'app.g.dart';
 

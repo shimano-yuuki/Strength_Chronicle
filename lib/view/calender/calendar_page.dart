@@ -6,8 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'package:workout_app/textstyle.dart';
 
-import '../app.dart';
-import '../view_model/calendar_notifier.dart';
+import '../../app.dart';
+import '../../view_model/calendar_notifier.dart';
 import 'calendar_detail_page.dart';
 
 class CalendarPage extends ConsumerWidget {
@@ -52,7 +52,7 @@ class CalendarPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           'カレンダー',
-          style: MyTextStyles.title.large.bold,
+          style: MyTextStyles.title.bold,
         ),
         centerTitle: true,
         elevation: 5,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workout_app/textstyle.dart';
-import 'package:workout_app/view/diary_add_page.dart';
+import 'package:workout_app/view/diary/diary_add_page.dart';
 
-import '../app.dart';
+import '../../app.dart';
 
 class DiaryPage extends ConsumerWidget {
   const DiaryPage({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class DiaryPage extends ConsumerWidget {
       appBar: AppBar(
         title: Text(
           '日記',
-          style: MyTextStyles.title.large.bold,
+          style: MyTextStyles.title.bold,
         ),
         centerTitle: true,
         elevation: 5,
