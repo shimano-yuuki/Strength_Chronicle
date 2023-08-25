@@ -24,7 +24,7 @@ class SelectedBottomNavigation extends _$SelectedBottomNavigation {
 class BottomNavigation extends ConsumerWidget {
   const BottomNavigation({Key? key}) : super(key: key);
 
-  static final _screen = [LoginPage(), CalendarPage(), DiaryPage()];
+  static final _screen = [MemoPage(), CalendarPage(), DiaryPage()];
   static final _screenIcon = [
     Icons.edit_note,
     Icons.event,

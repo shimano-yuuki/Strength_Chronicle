@@ -4,6 +4,8 @@ import 'package:workout_app/textstyle.dart';
 import 'package:workout_app/view/signup_page.dart';
 import 'package:workout_app/view/widget/text_form.dart';
 
+import '../app.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
@@ -113,7 +115,9 @@ class LoginPage extends StatelessWidget {
                     height: 60,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavigation()));
+                    },
                     child: Container(
                       height: 50,
                       decoration: BoxDecoration(
