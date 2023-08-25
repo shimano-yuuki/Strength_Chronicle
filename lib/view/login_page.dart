@@ -135,14 +135,11 @@ class LoginPage extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  SizedBox(
-                    height: 6,
-                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'すでにアカウントをお持ちの方は',
+                        'アカウントをお持ちでない方は',
                         style: MyTextStyles.label,
                       ),
                       GestureDetector(
