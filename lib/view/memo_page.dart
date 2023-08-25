@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workout_app/app.dart';
 import 'package:workout_app/model/memo_state.dart';
+import 'package:workout_app/textstyle.dart';
 import 'package:workout_app/view/widget/bottom_sheet.dart';
 import 'package:workout_app/view/widget/tab.dart';
 import 'package:workout_app/view_model/memo_notifier.dart';
@@ -14,12 +15,13 @@ class MemoPage extends ConsumerWidget {
     final appBar = AppBar(
       title: Text(
         '種目メモ',
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: MyTextStyles.title.bold,
       ),
       centerTitle: true,
       elevation: 5,
       bottom: TabBar(
-        labelStyle: TextStyle(fontWeight: FontWeight.bold),
+        labelStyle: MyTextStyles.label.large.bold,
+        unselectedLabelColor: Colors.grey,
         tabs: [
           Tab(text: '全て'),
           Tab(text: '胸'),
@@ -36,8 +38,8 @@ class MemoPage extends ConsumerWidget {
         DragTarget<Memo>(
           builder: (context, candidateData, rejectedData) {
             return Container(
-              width: 56.0,
-              height: 56.0,
+              width: 56,
+              height: 56,
               decoration: BoxDecoration(
                 color: Colors.red,
                 shape: BoxShape.circle,
@@ -45,7 +47,7 @@ class MemoPage extends ConsumerWidget {
                   BoxShadow(
                     color: Colors.black.withOpacity(0.3),
                     offset: Offset(0, 2),
-                    blurRadius: 4.0,
+                    blurRadius: 4,
                   ),
                 ],
               ),
@@ -63,7 +65,7 @@ class MemoPage extends ConsumerWidget {
                 return AlertDialog(
                   title: Text('確認'),
                   content: Text('本当に削除しますか？'),
-                  actions: <Widget>[
+                  actions: [
                     TextButton(
                       child: Text('キャンセル'),
                       onPressed: () => Navigator.of(context).pop(),
@@ -71,8 +73,7 @@ class MemoPage extends ConsumerWidget {
                     TextButton(
                       child: Text('削除'),
                       onPressed: () {
-                        ref.
-                        read(memosProvider.notifier).removeMemo(data.id);
+                        ref.read(memosProvider.notifier).removeMemo(data.id);
                         Navigator.of(context).pop();
                       },
                     ),
