@@ -6,7 +6,7 @@ part of 'Login_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isObscureHash() => r'9c0071fb7b7c9d366a1e3614fc3b76ccd15d369a';
+String _$isObscureHash() => r'71cf66487d62adf94012bd6c481a87822a5cc03e';
 
 /// See also [IsObscure].
 @ProviderFor(IsObscure)
