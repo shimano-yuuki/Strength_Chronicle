@@ -1,5 +1,5 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:workout_app/model/memo_state.dart';
+import 'package:workout_app/model/memo/memo_state.dart';
 part 'memo_notifier.g.dart';
 
 @riverpod

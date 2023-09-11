@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:uuid/uuid.dart';
-import 'package:workout_app/model/memo_state.dart';
+import 'package:workout_app/model/memo/memo_state.dart';
 import 'package:workout_app/view/widget/dropdown_button.dart';
 import 'package:workout_app/view_model/memo_notifier.dart';
 
