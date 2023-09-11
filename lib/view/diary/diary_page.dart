@@ -82,7 +82,7 @@ class DiaryPage extends ConsumerWidget {
             },
           );
         },
-        error: (error, stackTrace) => Center(child: Text(error.toString())), //個人的には「再読み込み」のボタンを表示してref.refreshさせることが多いです。
+        error: (error, stackTrace) => Center(child: Text(error.toString()),), //個人的には「再読み込み」のボタンを表示してref.refreshさせることが多いです。
       ),
 
       floatingActionButton:
