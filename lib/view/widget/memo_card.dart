@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:workout_app/model/memo_state.dart';
+import 'package:workout_app/model/memo/memo_state.dart';
 import 'package:workout_app/view/memo/memo_detail_page.dart';
 
 class MemoCardWidget extends ConsumerWidget {
