@@ -6,7 +6,7 @@ part of 'calendar_notifier.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$daySelectedHash() => r'74e7c7dc6cedcfd9038317a8cd5998d57c2bf596';
+String _$daySelectedHash() => r'ce6d7cb09d7a48d4be9a959cb628206b18747c2d';
 
 /// See also [DaySelected].
 @ProviderFor(DaySelected)
@@ -21,4 +21,5 @@ final daySelectedProvider =
 );
 
 typedef _$DaySelected = AutoDisposeNotifier<DateTime>;
-// ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
+// ignore_for_file: type=lint
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member

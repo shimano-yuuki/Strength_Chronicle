@@ -6,6 +6,7 @@ import 'package:workout_app/view/login_page.dart';
 
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   const app = MyApp();
   const scope = ProviderScope(child: app);
    /// 下の記述でカレンダーを日本語かさせる　///
