@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:workout_app/service.dart';
 import 'package:workout_app/textstyle.dart';
 import 'package:workout_app/view/signup_page.dart';
 import 'package:workout_app/view/widget/text_form.dart';
@@ -35,7 +36,10 @@ class LoginPage extends StatelessWidget {
                     children: [
                       Expanded(
                         child: GestureDetector(
-                          onTap: () {},
+                          onTap: () async{
+                            final service = AuthService();
+                            await service.signIn();
+                          },
                           child: LoginIconWidget(
                             logoId: 'assets/images/google-logo.svg',
                           ),
