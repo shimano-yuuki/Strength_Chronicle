@@ -63,6 +63,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '960610492652',
     projectId: 'strengthchronicle',
     storageBucket: 'strengthchronicle.appspot.com',
+    androidClientId: '960610492652-9b0284ume6urgbv08e0h4mm19au718a3.apps.googleusercontent.com',
     iosClientId: '960610492652-rif0n3ao8cj5mhnut1849fovjbdsd583.apps.googleusercontent.com',
     iosBundleId: 'com.example.workoutApp',
   );

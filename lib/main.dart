@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:workout_app/app.dart';
+import 'package:workout_app/router.dart';
 import 'package:workout_app/view/login_page.dart';
 import 'firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -21,12 +22,13 @@ Future<void> main()  async{
       runApp(scope));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context,WidgetRef ref) {
+    final router  =  ref.watch(routerProvider);
+    return MaterialApp.router(
       title: 'StrengthChronicle',
       theme: ThemeData(
         primarySwatch: Colors.orange,
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
           backgroundColor: Colors.white
         )
       ),
-      home: LoginPage(),
+      routerConfig: router,
     );
   }
 }

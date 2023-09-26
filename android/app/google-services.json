@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "960610492652-eksgi4l61ffr3j2nu2f03tpimqv3rd84.apps.googleusercontent.com",
+          "client_id": "960610492652-9b0284ume6urgbv08e0h4mm19au718a3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.workout_app",
+            "certificate_hash": "cefbfd26d885c9d0334ca67d371835ec6d0e1050"
+          }
+        },
+        {
+          "client_id": "320802277155-v5v9sk1da1fj7e45cchvv5hf4u7662bd.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,11 +35,11 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "960610492652-2c6pmbq2qmh30vum4tdrckvrdt6p9ptm.apps.googleusercontent.com",
+              "client_id": "9320802277155-v5v9sk1da1fj7e45cchvv5hf4u7662bd.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "960610492652-rif0n3ao8cj5mhnut1849fovjbdsd583.apps.googleusercontent.com",
+              "client_id": "320802277155-v5v9sk1da1fj7e45cchvv5hf4u7662bd.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
                 "bundle_id": "com.example.workoutApp"

@@ -1,24 +1,24 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'Login_notifier.dart';
+part of 'router.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$isObscureHash() => r'71cf66487d62adf94012bd6c481a87822a5cc03e';
+String _$routerHash() => r'1636d9e0f1aa9499f1c77923ad3d2f8029faeffc';
 
-/// See also [IsObscure].
-@ProviderFor(IsObscure)
-final isObscureProvider = AutoDisposeNotifierProvider<IsObscure, bool>.internal(
-  IsObscure.new,
-  name: r'isObscureProvider',
+/// See also [router].
+@ProviderFor(router)
+final routerProvider = AutoDisposeProvider<GoRouter>.internal(
+  router,
+  name: r'routerProvider',
   debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : _$isObscureHash,
+      const bool.fromEnvironment('dart.vm.product') ? null : _$routerHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$IsObscure = AutoDisposeNotifier<bool>;
+typedef RouterRef = AutoDisposeProviderRef<GoRouter>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
