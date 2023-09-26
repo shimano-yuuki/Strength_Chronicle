@@ -20,7 +20,7 @@ final userChangesProvider = AutoDisposeStreamProvider<User?>.internal(
 );
 
 typedef UserChangesRef = AutoDisposeStreamProviderRef<User?>;
-String _$userHash() => r'4210f47b922b25223c33d2df1a2341994ee5fcc1';
+String _$userHash() => r'3cc9ecd667fcb1fd39e74d498ecab726c98cf46a';
 
 /// See also [user].
 @ProviderFor(user)
@@ -63,4 +63,4 @@ final userIdProvider = AutoDisposeProvider<String>.internal(
 
 typedef UserIdRef = AutoDisposeProviderRef<String>;
 // ignore_for_file: type=lint
-// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member
+// ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

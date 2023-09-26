@@ -14,7 +14,7 @@ User? user(UserRef ref){
   final userChanges = ref.watch(userChangesProvider);
   return userChanges.when(
       loading: () => null,
-      error: (e,s) => null,
+      error: (_,__) => null,
       data: (d) => d,
   );
 }
@@ -35,7 +35,6 @@ class UserIdScope extends ConsumerWidget {
     super.key,
     required this.child,
   });
-
   final Widget child;
 
   @override
@@ -43,12 +42,9 @@ class UserIdScope extends ConsumerWidget {
     /// サインインしているユーザーの情報
     final user = ref.watch(userProvider);
     if (user == null) {
-      // ユーザーが見つからないとき グルグル
       return const CircularProgressIndicator();
     } else {
-      // ユーザーが見つかったとき
       return ProviderScope(
-        // ユーザーIDを上書き
         overrides: [
           userIdProvider.overrideWithValue(user.uid),
         ],
