@@ -93,6 +93,12 @@ class DrawerWidget extends ConsumerWidget {
             onTap: () async{
               final service = AuthService();
               await service.signOut();
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => LoginPage(
+                    )),
+              );
             },
             leading: Icon(Icons.exit_to_app),
             title: Text(
