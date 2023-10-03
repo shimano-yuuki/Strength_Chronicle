@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:uuid/uuid.dart';
 import 'package:workout_app/model/memo/memo_state.dart';
 import 'package:workout_app/view/widget/dropdown_button.dart';
@@ -29,10 +30,9 @@ class BottomSheetWidget extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Icon(
-                Icons.cancel,
-                color: Colors.grey,
-              ),
+              IconButton(onPressed: (){
+                Navigator.of(context).pop();
+              }, icon: Icon(Icons.cancel,color: Colors.grey,)),
               Text(
                 '種目を追加',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
