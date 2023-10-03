@@ -39,6 +39,7 @@ class LoginPage extends StatelessWidget {
                           onTap: () async{
                             final service = AuthService();
                             await service.signIn();
+                            await Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavigation()));
                           },
                           child: LoginIconWidget(
                             logoId: 'assets/images/google-logo.svg',
@@ -118,6 +119,7 @@ class LoginPage extends StatelessWidget {
                   SizedBox(
                     height: 60,
                   ),
+                  ///
                   InkWell(
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavigation()));
