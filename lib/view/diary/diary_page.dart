@@ -21,7 +21,7 @@ class DiaryPage extends ConsumerWidget {
         centerTitle: true,
         elevation: 5,
       ),
-      drawer: DrawerWidget(),
+      drawer: const DrawerWidget(),
       body:diaries.when(
         loading: () => const Center(
           child: CircularProgressIndicator(),
@@ -34,11 +34,11 @@ class DiaryPage extends ConsumerWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   Row(children: [
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Text(diary.createdAt as String,style: MyTextStyles.body),
-                    SizedBox(width: 10),
+                    const SizedBox(width: 10),
                     Expanded(
                       child: Container(
                         decoration: const BoxDecoration(
@@ -56,11 +56,11 @@ class DiaryPage extends ConsumerWidget {
                     padding:
                     const EdgeInsets.symmetric(horizontal: 50),
                     child: Column(children: [
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       ConstrainedBox(
-                        constraints: BoxConstraints(
+                        constraints: const BoxConstraints(
                           minHeight: 0,
                         ),
                         child: Expanded(
@@ -72,7 +72,7 @@ class DiaryPage extends ConsumerWidget {
                           ),
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                     ]),
@@ -92,7 +92,7 @@ class DiaryPage extends ConsumerWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => DiaryAddPage(
+                builder: (context) => const DiaryAddPage(
                 )),
           );
           // Add your onPressed code here!

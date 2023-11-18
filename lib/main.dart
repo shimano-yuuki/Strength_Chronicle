@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
       home: BottomNavigation(),
       title: 'StrengthChronicle',
       theme: ThemeData(
+
         primarySwatch: Colors.orange,
         fontFamily: 'Noto_Sans_JP',
         appBarTheme: AppBarTheme(

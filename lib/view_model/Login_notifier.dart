@@ -13,3 +13,19 @@ class IsObscure extends _$IsObscure {
     state = !state;
   }
 }
+
+@riverpod
+class EmailController extends _$EmailController {
+  @override
+  String build() {
+    return "";
+  }
+}
+
+@riverpod
+class PasswordController extends _$PasswordController {
+  @override
+   String build() {
+    return "";
+  }
+}
