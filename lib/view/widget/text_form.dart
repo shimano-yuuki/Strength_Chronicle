@@ -41,8 +41,11 @@ class TextFormWidget extends ConsumerWidget {
       obscureText: obscure == false ? false : ref.watch(isObscureProvider),
       keyboardType: keyboardType,
       decoration: InputDecoration(
+          floatingLabelBehavior: FloatingLabelBehavior.always,
           labelText: labelText,
-          border: OutlineInputBorder(),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
           prefixIcon: icon,
           suffixIcon: suffixIcon),
     );
