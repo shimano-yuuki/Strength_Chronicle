@@ -139,6 +139,7 @@ class LoginPage extends ConsumerWidget {
                       icon: const Icon(Icons.lock),
                       labelText: 'パスワード',
                       obscure: true,
+                      // validateText: V,
                     ),
                     const SizedBox(
                       height: 10,
@@ -163,6 +164,7 @@ class LoginPage extends ConsumerWidget {
                               emailController.text, passwordController.text);
                           debugPrint(emailController.text);
                           debugPrint(passwordController.text);
+
                         } on FirebaseAuthException catch (e) {
                           var message =
                               FirebaseAuthErrorExt.fromCode(e.code).message;

@@ -37,12 +37,12 @@ final emailControllerProvider =
 
 typedef _$EmailController = AutoDisposeNotifier<String>;
 String _$passwordControllerHash() =>
-    r'9225762379af689e6d4de9347a4114b8b71d6d96';
+    r'6fcb44dfd66ab25fe78e6886c75c18bf07cd6ebf';
 
 /// See also [PasswordController].
 @ProviderFor(PasswordController)
 final passwordControllerProvider =
-    AutoDisposeNotifierProvider<PasswordController, dynamic>.internal(
+    AutoDisposeNotifierProvider<PasswordController, String>.internal(
   PasswordController.new,
   name: r'passwordControllerProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -52,6 +52,21 @@ final passwordControllerProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$PasswordController = AutoDisposeNotifier<dynamic>;
+typedef _$PasswordController = AutoDisposeNotifier<String>;
+String _$validatorHash() => r'6251326721349641d9cc185faaea0f4a61e4fa96';
+
+/// See also [Validator].
+@ProviderFor(Validator)
+final validatorProvider =
+    AutoDisposeNotifierProvider<Validator, String? Function(String?)?>.internal(
+  Validator.new,
+  name: r'validatorProvider',
+  debugGetCreateSourceHash:
+      const bool.fromEnvironment('dart.vm.product') ? null : _$validatorHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$Validator = AutoDisposeNotifier<String? Function(String?)?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member
