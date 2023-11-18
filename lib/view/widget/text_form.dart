@@ -9,16 +9,19 @@ class TextFormWidget extends ConsumerWidget {
     required this.icon,
     required this.labelText,
     this.obscure = false,
+    this.onChanged,
+    this.controller,
   });
 
   final TextInputType? keyboardType;
   final String labelText;
   final Icon icon;
   final bool obscure;
+  final void Function(String)? onChanged;
+  final TextEditingController? controller;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
     Widget? suffixIcon;
     if (obscure == true) {
       suffixIcon = IconButton(
@@ -33,6 +36,8 @@ class TextFormWidget extends ConsumerWidget {
     }
 
     return TextFormField(
+      controller: controller,
+      onChanged: onChanged,
       obscureText: obscure == false ? false : ref.watch(isObscureProvider),
       keyboardType: keyboardType,
       decoration: InputDecoration(

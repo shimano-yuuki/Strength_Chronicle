@@ -1,17 +1,40 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:workout_app/custom_alert_dialog.dart';
+import 'package:workout_app/firebase_auth_error.dart';
 import 'package:workout_app/service.dart';
 import 'package:workout_app/textstyle.dart';
 import 'package:workout_app/view/signup_page.dart';
 import 'package:workout_app/view/widget/text_form.dart';
+import 'package:workout_app/view_model/Login_notifier.dart';
 
 import '../app.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+
+    final emailProvider = ref.read(emailControllerProvider.notifier);
+    final passwordProvider = ref.read(passwordControllerProvider.notifier);
+
+    void _showErrorDialog(BuildContext context, String message){
+      showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return CustomAlertDialog(
+              title: 'エラー',
+              contentWidget: Text(message),
+              defaultActionText: 'OK',
+          );
+        },
+      );
+    }
+
     return Scaffold(
       body: Center(
         child: SingleChildScrollView(
@@ -28,43 +51,52 @@ class LoginPage extends StatelessWidget {
                     'Login',
                     style: MyTextStyles.title.large.bold,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 60,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      /// Google ログイン ///
                       Expanded(
                         child: GestureDetector(
-                          onTap: () async{
+                          onTap: () async {
                             final service = AuthService();
-                            await service.signIn();
-                            await Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavigation()));
+                            await service.signInWithGoogle();
+                            // await Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) =>
+                            //             const BottomNavigation()));
                           },
-                          child: LoginIconWidget(
+                          child: const LoginIconWidget(
                             logoId: 'assets/images/google-logo.svg',
                           ),
                         ),
                       ),
+
+                      /// X ログイン　///
                       Expanded(
                         child: GestureDetector(
                           onTap: () {},
-                          child: LoginIconWidget(
+                          child: const LoginIconWidget(
                             logoId: 'assets/images/x-logo.svg',
                           ),
                         ),
                       ),
+
+                      /// APPlE ログイン ///
                       Expanded(
                         child: GestureDetector(
                           onTap: () {},
-                          child: LoginIconWidget(
+                          child: const LoginIconWidget(
                             logoId: 'assets/images/apple-logo.svg',
                           ),
                         ),
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 60,
                   ),
                   Row(
@@ -91,22 +123,30 @@ class LoginPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 60,
                   ),
                   TextFormWidget(
-                    icon: Icon(Icons.mail),
+                    onChanged: (value) {
+                      emailProvider.state = value;
+                      // debugPrint('メールアドレスに入力された値：${emailController.text}');
+                    },
+                    icon: const Icon(Icons.mail),
                     labelText: 'メールアドレス',
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   TextFormWidget(
-                    icon: Icon(Icons.lock),
+                    onChanged: (value) {
+                      passwordProvider.state = value;
+                      // debugPrint('パスワードにに入力された値：${passwordController.text}');
+                    },
+                    icon: const Icon(Icons.lock),
                     labelText: 'パスワード',
                     obscure: true,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Align(
@@ -116,13 +156,28 @@ class LoginPage extends StatelessWidget {
                       style: MyTextStyles.label.blue,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 60,
                   ),
-                  ///
+
+                  /// メール&パスワード ログイン ///
                   InkWell(
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>BottomNavigation()));
+                    onTap: () async {
+                      final service = AuthService();
+                      try{
+                        debugPrint(emailProvider.state);
+                        debugPrint(passwordProvider.state);
+                        await service.signInWithEmailAndPassword(
+                            emailProvider.state, passwordProvider.state);
+                      } on FirebaseAuthException catch (e){
+                        var message = FirebaseAuthErrorExt.fromCode(e.code).message;
+                        _showErrorDialog(context, message);
+                      }
+                      //
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => const BottomNavigation()));
                     },
                     child: Container(
                       height: 50,
@@ -138,7 +193,25 @@ class LoginPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  SizedBox(
+
+                  /// Alertダイアログをサンプルで表示 ///
+                  // ElevatedButton(
+                  //     onPressed: () {
+                  //       showDialog(
+                  //         context: context,
+                  //         builder: (_) => CustomAlertDialog(
+                  //           title: 'エラー',
+                  //           contentWidget: Text(
+                  //             'メールアドレスまたはパスワードが違います',
+                  //             style: MyTextStyles.body,
+                  //           ),
+                  //           defaultActionText: 'OK',
+                  //           action: () {},
+                  //         ),
+                  //       );
+                  //     },
+                  //     child: Text('Alertダイアログ')),
+                  const SizedBox(
                     height: 10,
                   ),
                   Row(
@@ -153,7 +226,7 @@ class LoginPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => SignUpPage()));
+                                  builder: (context) => const SignUpPage()));
                         },
                         child: Text(
                           'こちら',
@@ -162,7 +235,7 @@ class LoginPage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 60,
                   ),
                 ],
@@ -188,17 +261,18 @@ class LoginIconWidget extends StatelessWidget {
     return Container(
       width: 80,
       height: 80,
-      decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              spreadRadius: 1,
-              blurRadius: 5,
-              offset: Offset(1, 1),
-            )
-          ]),
+      decoration: const BoxDecoration(
+        shape: BoxShape.circle,
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey,
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(1, 1),
+          )
+        ],
+      ),
       child: FittedBox(
         fit: BoxFit.scaleDown,
         child: SvgPicture.asset(

@@ -33,6 +33,7 @@ class SignUpPage extends StatelessWidget {
                     child: Text(
                       'メールアドレス',
                       style: MyTextStyles.body.large.bold,
+
                     ),
                   ),
                   SizedBox(
@@ -79,7 +80,9 @@ class SignUpPage extends StatelessWidget {
                     height: 60,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+
+                    },
                     child: Container(
                       height: 50,
                       decoration: BoxDecoration(
