@@ -20,6 +20,7 @@ class MemoPage extends ConsumerWidget {
       centerTitle: true,
       elevation: 5,
       bottom: TabBar(
+        isScrollable: true,
         labelStyle: MyTextStyles.label.large.bold,
         unselectedLabelColor: Colors.grey,
         tabs: [
