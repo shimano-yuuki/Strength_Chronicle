@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:workout_app/app.dart';
 
 class AuthService {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -17,7 +18,7 @@ class AuthService {
   }
 
   ///--- Google ログイン ---///
-  Future<void> signInWithGoogle() async {
+  Future<void> signInWithGoogle(BuildContext context) async {
     const clientId =
         '320802277155-v5v9sk1da1fj7e45cchvv5hf4u7662bd.apps.googleusercontent.com';
 
@@ -31,6 +32,13 @@ class AuthService {
     if (acceseToken == null) {
       debugPrint('accecetoken erorr');
       return;
+    }else{
+      Navigator.of(context).pushAndRemoveUntil(
+        MaterialPageRoute(
+          builder: (context) => BottomNavigation(),
+        ),
+            (route) => false,
+      );
     }
     final oAuthCredential = GoogleAuthProvider.credential(
       accessToken: acceseToken,

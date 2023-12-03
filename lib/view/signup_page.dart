@@ -55,7 +55,7 @@ class SignUpPage extends StatelessWidget {
                       'Sign Up',
                       style: MyTextStyles.title.large.bold,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 60,
                     ),
                     Align(
@@ -65,17 +65,17 @@ class SignUpPage extends StatelessWidget {
                         style: MyTextStyles.body.large.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     TextFormWidget(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
-                      icon: Icon(Icons.mail),
+                      icon: const Icon(Icons.mail),
                       labelText: 'メールアドレス',
                       validateText: ValidateText.email,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 32,
                     ),
                     Align(
@@ -85,7 +85,7 @@ class SignUpPage extends StatelessWidget {
                         style: MyTextStyles.body.large.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     TextFormWidget(
@@ -103,7 +103,7 @@ class SignUpPage extends StatelessWidget {
                         style: MyTextStyles.label.grey,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 56,
                     ),
                     InkWell(
@@ -120,7 +120,7 @@ class SignUpPage extends StatelessWidget {
                               context,
                               MaterialPageRoute(
                                   builder: (context) =>
-                                      BottomNavigation()));
+                                      const BottomNavigation()));
                         } on FirebaseAuthException catch (e) {
                           var message =
                               FirebaseAuthErrorExt.fromCode(e.code).message;
@@ -141,7 +141,7 @@ class SignUpPage extends StatelessWidget {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Row(
@@ -156,7 +156,7 @@ class SignUpPage extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => LoginPage()));
+                                    builder: (context) => const LoginPage()));
                           },
                           child: Text(
                             'こちら',
