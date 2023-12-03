@@ -69,12 +69,7 @@ class LoginPage extends ConsumerWidget {
                           child: GestureDetector(
                             onTap: () async {
                               final service = AuthService();
-                              await service.signInWithGoogle();
-                              await Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          const BottomNavigation()));
+                              await service.signInWithGoogle(context);
                             },
                             child: const LoginIconWidget(
                               logoId: 'assets/images/google-logo.svg',
