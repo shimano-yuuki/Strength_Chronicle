@@ -1,20 +1,36 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:workout_app/app.dart';
+import 'package:workout_app/firebase_auth_error.dart';
 import 'package:workout_app/service.dart';
 import 'package:workout_app/textstyle.dart';
 import 'package:workout_app/validate.dart';
 import 'package:workout_app/view/login_page.dart';
+import 'package:workout_app/view/widget/custom_alert_dialog.dart';
 import 'package:workout_app/view/widget/text_form.dart';
 
 class SignUpPage extends StatelessWidget {
-   SignUpPage({super.key});
-
+  SignUpPage({super.key});
 
   final emailController = TextEditingController();
-   final passwordController = TextEditingController();
-   final validatePasswordController = TextEditingController();
+  final passwordController = TextEditingController();
+  final validatePasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    void _showErrorDialog(BuildContext context, String message) {
+      showDialog(
+        context: context,
+        builder: (BuildContext dialogContext) {
+          return CustomAlertDialog(
+            title: 'エラー',
+            contentWidget: Text(message),
+            defaultActionText: 'OK',
+          );
+        },
+      );
+    }
+
     final bottomSpace = MediaQuery.of(context).viewInsets.bottom;
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -25,7 +41,7 @@ class SignUpPage extends StatelessWidget {
           child: SingleChildScrollView(
             reverse: true,
             child: Padding(
-              padding:  EdgeInsets.only(
+              padding: EdgeInsets.only(
                 left: 20,
                 right: 20,
                 bottom: bottomSpace,
@@ -47,7 +63,6 @@ class SignUpPage extends StatelessWidget {
                       child: Text(
                         'メールアドレス',
                         style: MyTextStyles.body.large.bold,
-
                       ),
                     ),
                     SizedBox(
@@ -88,22 +103,29 @@ class SignUpPage extends StatelessWidget {
                         style: MyTextStyles.label.grey,
                       ),
                     ),
-                    // SizedBox(
-                    //   height: 30,
-                    // ),
-                    // TextFormWidget(
-                    //   keyboardType: TextInputType.visiblePassword,
-                    //   controller: validatePasswordController,
-                    //   icon: const Icon(Icons.lock),
-                    //   labelText: '確認用パスワード',
-                    //   obscure: true,
-                    // ),
                     SizedBox(
                       height: 56,
                     ),
                     InkWell(
-                      onTap: () {
+                      onTap: () async {
+                        final service = AuthService();
+                        try {
+                          await service.createUserWithEmailAndPassword(
+                              emailController.text, passwordController.text);
 
+                          debugPrint("新しくユーザーが登録されました。");
+                          debugPrint("email:${emailController.text}");
+                          debugPrint("password:${passwordController.text}");
+                          await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      BottomNavigation()));
+                        } on FirebaseAuthException catch (e) {
+                          var message =
+                              FirebaseAuthErrorExt.fromCode(e.code).message;
+                          _showErrorDialog(context, message);
+                        }
                       },
                       child: Container(
                         height: 50,

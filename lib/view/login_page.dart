@@ -172,7 +172,9 @@ class LoginPage extends ConsumerWidget {
                         try {
                           await service.signInWithEmailAndPassword(
                               emailController.text, passwordController.text);
-                          debugPrint("ログインしました：${emailController.text}:${passwordController.text}");
+                          debugPrint("ユーザーがログインしました。");
+                          debugPrint("email:${emailController.text}");
+                          debugPrint("password:${passwordController.text}");
                           await Navigator.push(
                               context,
                               MaterialPageRoute(
