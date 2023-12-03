@@ -5,7 +5,11 @@ import 'package:workout_app/view/login_page.dart';
 import 'package:workout_app/view/widget/text_form.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+   SignUpPage({super.key});
+
+  final emailController = TextEditingController();
+   final passwordController = TextEditingController();
+   final validatePasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +44,8 @@ class SignUpPage extends StatelessWidget {
                     height: 20,
                   ),
                   TextFormWidget(
+                    controller: emailController,
+                    keyboardType: TextInputType.emailAddress,
                     icon: Icon(Icons.mail),
                     labelText: 'メールアドレス',
                   ),
@@ -57,14 +63,16 @@ class SignUpPage extends StatelessWidget {
                     height: 20,
                   ),
                   TextFormWidget(
-                    icon: Icon(Icons.lock),
+                    keyboardType: TextInputType.visiblePassword,
+                    controller: passwordController,
+                    icon: const Icon(Icons.lock),
                     labelText: 'パスワード',
                     obscure: true,
                   ),
                   Align(
                     alignment: Alignment.topLeft,
                     child: Text(
-                      '半角英数と記号を含む6文字以上',
+                      '半角英数と記号を含む8文字以上',
                       style: MyTextStyles.label.grey,
                     ),
                   ),
@@ -72,7 +80,9 @@ class SignUpPage extends StatelessWidget {
                     height: 30,
                   ),
                   TextFormWidget(
-                    icon: Icon(Icons.lock),
+                    keyboardType: TextInputType.visiblePassword,
+                    controller: validatePasswordController,
+                    icon: const Icon(Icons.lock),
                     labelText: '確認用パスワード',
                     obscure: true,
                   ),

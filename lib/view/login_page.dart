@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:workout_app/firebase_auth_error.dart';
 import 'package:workout_app/service.dart';
 import 'package:workout_app/textstyle.dart';
+import 'package:workout_app/validate.dart';
 import 'package:workout_app/view/signup_page.dart';
 import 'package:workout_app/view/widget/custom_alert_dialog.dart';
 import 'package:workout_app/view/widget/text_form.dart';
@@ -16,6 +17,8 @@ class LoginPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
+
+    final bottomSpace = MediaQuery.of(context).viewInsets.bottom;
 
     void _showErrorDialog(BuildContext context, String message) {
       showDialog(
@@ -31,14 +34,18 @@ class LoginPage extends ConsumerWidget {
     }
 
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         behavior: HitTestBehavior.opaque,
         child: Center(
           child: SingleChildScrollView(
+            reverse: true,
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20,
+              padding:  EdgeInsets.only(
+                left: 20,
+                right: 20,
+                bottom: bottomSpace,
               ),
               child: Form(
                 child: Column(
@@ -129,6 +136,7 @@ class LoginPage extends ConsumerWidget {
                       controller: emailController,
                       icon: const Icon(Icons.mail),
                       labelText: 'メールアドレス',
+                      validateText: ValidateText.email,
                     ),
                     const SizedBox(
                       height: 20,
@@ -139,7 +147,7 @@ class LoginPage extends ConsumerWidget {
                       icon: const Icon(Icons.lock),
                       labelText: 'パスワード',
                       obscure: true,
-                      // validateText: V,
+                      validateText: ValidateText.password,
                     ),
                     const SizedBox(
                       height: 10,
@@ -164,7 +172,6 @@ class LoginPage extends ConsumerWidget {
                               emailController.text, passwordController.text);
                           debugPrint(emailController.text);
                           debugPrint(passwordController.text);
-
                         } on FirebaseAuthException catch (e) {
                           var message =
                               FirebaseAuthErrorExt.fromCode(e.code).message;
@@ -190,24 +197,6 @@ class LoginPage extends ConsumerWidget {
                         ),
                       ),
                     ),
-
-                    /// Alertダイアログをサンプルで表示 ///
-                    // ElevatedButton(
-                    //     onPressed: () {
-                    //       showDialog(
-                    //         context: context,
-                    //         builder: (_) => CustomAlertDialog(
-                    //           title: 'エラー',
-                    //           contentWidget: Text(
-                    //             'メールアドレスまたはパスワードが違います',
-                    //             style: MyTextStyles.body,
-                    //           ),
-                    //           defaultActionText: 'OK',
-                    //           action: () {},
-                    //         ),
-                    //       );
-                    //     },
-                    //     child: Text('Alertダイアログ')),
                     const SizedBox(
                       height: 10,
                     ),
@@ -223,7 +212,7 @@ class LoginPage extends ConsumerWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const SignUpPage()));
+                                    builder: (context) => SignUpPage()));
                           },
                           child: Text(
                             'こちら',

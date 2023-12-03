@@ -53,12 +53,12 @@ final passwordControllerProvider =
 );
 
 typedef _$PasswordController = AutoDisposeNotifier<String>;
-String _$validatorHash() => r'6251326721349641d9cc185faaea0f4a61e4fa96';
+String _$validatorHash() => r'fef3c50d17c1c191638fa8d8f6c7f8151d01ebab';
 
 /// See also [Validator].
 @ProviderFor(Validator)
 final validatorProvider =
-    AutoDisposeNotifierProvider<Validator, String? Function(String?)?>.internal(
+    AutoDisposeNotifierProvider<Validator, String?>.internal(
   Validator.new,
   name: r'validatorProvider',
   debugGetCreateSourceHash:
@@ -67,6 +67,6 @@ final validatorProvider =
   allTransitiveDependencies: null,
 );
 
-typedef _$Validator = AutoDisposeNotifier<String? Function(String?)?>;
+typedef _$Validator = AutoDisposeNotifier<String?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

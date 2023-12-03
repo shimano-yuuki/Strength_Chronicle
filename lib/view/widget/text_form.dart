@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workout_app/view_model/Login_notifier.dart';
 
 class TextFormWidget extends ConsumerWidget {
-  const TextFormWidget( {
+  const TextFormWidget({
     super.key,
     this.keyboardType,
     required this.icon,
@@ -38,6 +38,7 @@ class TextFormWidget extends ConsumerWidget {
     }
 
     return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       controller: controller,
       onChanged: onChanged,
       obscureText: obscure == false ? false : ref.watch(isObscureProvider),
@@ -52,30 +53,5 @@ class TextFormWidget extends ConsumerWidget {
           suffixIcon: suffixIcon),
       validator: validateText,
     );
-  }
-}
-
-class ValidateText {
-  static ValidateText validate = ValidateText();
-  static String? email(String? value) {
-    if(value != null){
-      String pattern = r'^[0-9a-z_./?-]+@([0-9a-z-]+\.)+[0-9a-z-]+$';
-      RegExp regExp = RegExp(pattern);
-      if(!regExp.hasMatch(value)){
-        return '正しいメールアドレスを入力してください';
-      }
-    }
-    return null;
-  }
-
-  static String? password(String? value) {
-    if(value != null){
-      const pattern = r'^[a-zA-Z0-9]{10,}$';
-      final regExp = RegExp(pattern);
-      if(!regExp.hasMatch(value)){
-        return '10文字以上の英数字を入力してください';
-      }
-    }
-    return null;
   }
 }

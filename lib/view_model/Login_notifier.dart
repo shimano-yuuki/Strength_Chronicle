@@ -33,25 +33,25 @@ class PasswordController extends _$PasswordController {
 @riverpod
 class Validator extends _$Validator {
   @override
-  String? Function(String?)? build() {
-    return null;
+  String? build() {
+    return '';
   }
-  static String? email(String? value) {
+  String? email(String? value) {
     if(value != null){
       String pattern = r'^[0-9a-z_./?-]+@([0-9a-z-]+\.)+[0-9a-z-]+$';
       RegExp regExp = RegExp(pattern);
       if(!regExp.hasMatch(value)){
-        return '正しいメールアドレスを入力してください';
+        state =  '正しいメールアドレスを入力してください';
       }
     }
     return null;
   }
-  static String? password(String? value) {
+  String? password(String? value) {
     if(value != null){
-      const pattern = r'^[a-zA-Z0-9]{10,}$';
+      const pattern = r'^[a-zA-Z0-9]{8,}$';
       final regExp = RegExp(pattern);
       if(!regExp.hasMatch(value)){
-        return '10文字以上の英数字を入力してください';
+        state =  '8文字以上の英数字を入力してください';
       }
     }
     return null;
