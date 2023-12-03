@@ -10,6 +10,8 @@ import 'package:workout_app/view/signup_page.dart';
 import 'package:workout_app/view/widget/custom_alert_dialog.dart';
 import 'package:workout_app/view/widget/text_form.dart';
 
+import '../app.dart';
+
 class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
 
@@ -68,11 +70,11 @@ class LoginPage extends ConsumerWidget {
                             onTap: () async {
                               final service = AuthService();
                               await service.signInWithGoogle();
-                              // await Navigator.push(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) =>
-                              //             const BottomNavigation()));
+                              await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const BottomNavigation()));
                             },
                             child: const LoginIconWidget(
                               logoId: 'assets/images/google-logo.svg',
@@ -170,18 +172,18 @@ class LoginPage extends ConsumerWidget {
                         try {
                           await service.signInWithEmailAndPassword(
                               emailController.text, passwordController.text);
-                          debugPrint(emailController.text);
-                          debugPrint(passwordController.text);
+                          debugPrint("ログインしました：${emailController.text}:${passwordController.text}");
+                          await Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const BottomNavigation()));
                         } on FirebaseAuthException catch (e) {
                           var message =
                               FirebaseAuthErrorExt.fromCode(e.code).message;
                           _showErrorDialog(context, message);
                         }
-                        //
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => const BottomNavigation()));
+
+
                       },
                       child: Container(
                         height: 50,
