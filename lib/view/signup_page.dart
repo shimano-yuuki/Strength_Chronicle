@@ -68,7 +68,7 @@ class SignUpPage extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormWidget(
+                    CustomTextFormWidget(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       icon: const Icon(Icons.mail),
@@ -88,7 +88,7 @@ class SignUpPage extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormWidget(
+                    CustomTextFormWidget(
                       keyboardType: TextInputType.visiblePassword,
                       controller: passwordController,
                       icon: const Icon(Icons.lock),

@@ -35,6 +35,7 @@ class Memos extends _$Memos {
     return [];
   }
   void addMemo(Memo memo) {
+
     state = [...state, memo];
   }
   void removeMemo(String memoId){

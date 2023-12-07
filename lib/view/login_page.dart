@@ -128,7 +128,7 @@ class LoginPage extends ConsumerWidget {
                     const SizedBox(
                       height: 60,
                     ),
-                    TextFormWidget(
+                    CustomTextFormWidget(
                       keyboardType: TextInputType.emailAddress,
                       controller: emailController,
                       icon: const Icon(Icons.mail),
@@ -138,7 +138,7 @@ class LoginPage extends ConsumerWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    TextFormWidget(
+                    CustomTextFormWidget(
                       keyboardType: TextInputType.visiblePassword,
                       controller: passwordController,
                       icon: const Icon(Icons.lock),

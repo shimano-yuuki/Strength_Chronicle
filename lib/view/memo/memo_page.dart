@@ -122,11 +122,12 @@ class MemoPage extends ConsumerWidget {
 
   void _showBottomSheetMenu(BuildContext context, WidgetRef ref) {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(25.0)),
       ),
-      builder: (builder) {
+      builder: (BuildContext context) {
         return BottomSheetWidget();
       },
     );
