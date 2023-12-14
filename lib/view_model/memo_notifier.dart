@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:workout_app/model/memo/memo_state.dart';
 part 'memo_notifier.g.dart';
@@ -13,20 +16,6 @@ class Visible extends _$Visible {
   }
 }
 
-@riverpod
-class TextFromField extends _$TextFromField {
-  @override
-   String build() {
-    return '';
-  }
-  void changeText(String text){
-    state = text;
-  }
-  void clearText(){
-    state = '';
-  }
-}
-
 
 @riverpod
 class Memos extends _$Memos {
@@ -39,7 +28,17 @@ class Memos extends _$Memos {
     state = [...state, memo];
   }
   void removeMemo(String memoId){
+    print(state);
     state.removeWhere((memo) => memo.id == memoId);
+    print(state);
+  }
+}
+// @riverpod
+@Riverpod(keepAlive: true)
+class TrainingNameController extends _$TrainingNameController {
+  @override
+  TextEditingController build() {
+    return TextEditingController();
   }
 }
 

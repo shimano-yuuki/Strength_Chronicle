@@ -14,6 +14,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+Memo _$MemoFromJson(Map<String, dynamic> json) {
+  return _Memo.fromJson(json);
+}
+
 /// @nodoc
 mixin _$Memo {
   String get id => throw _privateConstructorUsedError;
@@ -21,6 +25,7 @@ mixin _$Memo {
   String get part => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $MemoCopyWith<Memo> get copyWith => throw _privateConstructorUsedError;
 }
@@ -117,13 +122,15 @@ class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res, _$_Memo>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_Memo implements _Memo {
   const _$_Memo(
       {required this.id,
       required this.title,
       required this.part,
       required this.type});
+
+  factory _$_Memo.fromJson(Map<String, dynamic> json) => _$$_MemoFromJson(json);
 
   @override
   final String id;
@@ -150,6 +157,7 @@ class _$_Memo implements _Memo {
             (identical(other.type, type) || other.type == type));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, title, part, type);
 
@@ -158,6 +166,13 @@ class _$_Memo implements _Memo {
   @pragma('vm:prefer-inline')
   _$$_MemoCopyWith<_$_Memo> get copyWith =>
       __$$_MemoCopyWithImpl<_$_Memo>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MemoToJson(
+      this,
+    );
+  }
 }
 
 abstract class _Memo implements Memo {
@@ -166,6 +181,8 @@ abstract class _Memo implements Memo {
       required final String title,
       required final String part,
       required final String type}) = _$_Memo;
+
+  factory _Memo.fromJson(Map<String, dynamic> json) = _$_Memo.fromJson;
 
   @override
   String get id;
