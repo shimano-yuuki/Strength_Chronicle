@@ -2,7 +2,7 @@ import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.da
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
-import 'package:workout_app/service.dart';
+import 'package:workout_app/model/auth/firebase_auth.dart';
 import 'package:workout_app/textstyle.dart';
 import 'package:workout_app/view/calender/calendar_page.dart';
 import 'package:workout_app/view/diary/diary_page.dart';

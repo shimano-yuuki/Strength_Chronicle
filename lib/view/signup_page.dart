@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:workout_app/app.dart';
-import 'package:workout_app/firebase_auth_error.dart';
-import 'package:workout_app/service.dart';
+import 'package:workout_app/model/auth/firebase_auth_error.dart';
+import 'package:workout_app/model/auth/firebase_auth.dart';
 import 'package:workout_app/textstyle.dart';
 import 'package:workout_app/validate.dart';
 import 'package:workout_app/view/login_page.dart';
