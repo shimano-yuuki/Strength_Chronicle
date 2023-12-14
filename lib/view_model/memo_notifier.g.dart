@@ -20,23 +20,7 @@ final visibleProvider = AutoDisposeNotifierProvider<Visible, bool>.internal(
 );
 
 typedef _$Visible = AutoDisposeNotifier<bool>;
-String _$textFromFieldHash() => r'a979b1cecaf5c4f3f992d49983d4ed06b2177e8b';
-
-/// See also [TextFromField].
-@ProviderFor(TextFromField)
-final textFromFieldProvider =
-    AutoDisposeNotifierProvider<TextFromField, String>.internal(
-  TextFromField.new,
-  name: r'textFromFieldProvider',
-  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-      ? null
-      : _$textFromFieldHash,
-  dependencies: null,
-  allTransitiveDependencies: null,
-);
-
-typedef _$TextFromField = AutoDisposeNotifier<String>;
-String _$memosHash() => r'a9e913e6aafa7990c93114b457364bb841a84dc9';
+String _$memosHash() => r'e9877c620defd6a8d8c2719d2bfe259dca6c6d11';
 
 /// See also [Memos].
 @ProviderFor(Memos)
@@ -50,6 +34,23 @@ final memosProvider = AutoDisposeNotifierProvider<Memos, List<Memo>>.internal(
 );
 
 typedef _$Memos = AutoDisposeNotifier<List<Memo>>;
+String _$trainingNameControllerHash() =>
+    r'ea625110978c5ed2a9019309de94c641b7399333';
+
+/// See also [TrainingNameController].
+@ProviderFor(TrainingNameController)
+final trainingNameControllerProvider =
+    NotifierProvider<TrainingNameController, TextEditingController>.internal(
+  TrainingNameController.new,
+  name: r'trainingNameControllerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$trainingNameControllerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$TrainingNameController = Notifier<TextEditingController>;
 String _$dropDownButtonHash() => r'1d5109ea3681abd14cc2792cc28e48ebbeecec5f';
 
 /// See also [DropDownButton].

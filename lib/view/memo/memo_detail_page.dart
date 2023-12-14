@@ -15,6 +15,7 @@ class MemoDetailPage extends ConsumerWidget {
         actions: [
           IconButton(onPressed: (){
             ref.watch(memosProvider).remove(memo);
+            Navigator.of(context).pop();
             }, icon: Icon(Icons.delete_forever_outlined),)],
       ),
       body: Padding(

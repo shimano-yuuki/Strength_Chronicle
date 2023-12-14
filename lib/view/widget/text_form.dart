@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workout_app/view_model/Login_notifier.dart';
 
-class TextFormWidget extends ConsumerWidget {
-  const TextFormWidget({
+class CustomTextFormWidget extends ConsumerWidget {
+  const CustomTextFormWidget({
     super.key,
     this.keyboardType,
-    required this.icon,
+    this.icon,
     required this.labelText,
     this.obscure = false,
     this.onChanged,
@@ -16,7 +16,7 @@ class TextFormWidget extends ConsumerWidget {
 
   final TextInputType? keyboardType;
   final String labelText;
-  final Icon icon;
+  final Icon? icon;
   final bool obscure;
   final void Function(String)? onChanged;
   final TextEditingController? controller;
