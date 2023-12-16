@@ -1,6 +1,6 @@
-# workout_app
+# Strength_Chronicle
 
-A new Flutter project.
+筋トレ日記アプリ
 
 ## Getting Started
 
