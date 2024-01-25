@@ -179,8 +179,6 @@ class LoginPage extends ConsumerWidget {
                               FirebaseAuthErrorExt.fromCode(e.code).message;
                           _showErrorDialog(context, message);
                         }
-
-
                       },
                       child: Container(
                         height: 50,
