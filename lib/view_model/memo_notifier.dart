@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:workout_app/model/memo/memo_state.dart';
+import 'package:workout_app/repository/memo_repository_impl.dart';
 part 'memo_notifier.g.dart';
 
 @riverpod
@@ -26,6 +27,7 @@ class Memos extends _$Memos {
   void addMemo(Memo memo) {
 
     state = [...state, memo];
+    MemoRepositoryImpl().createMemo(memo: memo);
   }
   void removeMemo(String memoId){
     print(state);
