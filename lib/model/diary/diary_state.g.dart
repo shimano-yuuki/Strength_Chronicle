@@ -6,13 +6,14 @@ part of 'diary_state.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_Diary _$$_DiaryFromJson(Map<String, dynamic> json) => _$_Diary(
+_$DiaryImpl _$$DiaryImplFromJson(Map<String, dynamic> json) => _$DiaryImpl(
       chronicleContents: json['chronicleContents'] as String,
       createdAt: _$JsonConverterFromJson<Timestamp, DateTime>(
           json['createdAt'], const DateTimeConverter().fromJson),
     );
 
-Map<String, dynamic> _$$_DiaryToJson(_$_Diary instance) => <String, dynamic>{
+Map<String, dynamic> _$$DiaryImplToJson(_$DiaryImpl instance) =>
+    <String, dynamic>{
       'chronicleContents': instance.chronicleContents,
       'createdAt': _$JsonConverterToJson<Timestamp, DateTime>(
           instance.createdAt, const DateTimeConverter().toJson),

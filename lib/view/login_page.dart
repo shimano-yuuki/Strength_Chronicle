@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:workout_app/model/auth/firebase_auth_error.dart';
 import 'package:workout_app/model/auth/firebase_auth.dart';
+import 'package:workout_app/model/auth/firebase_auth_error.dart';
+import 'package:workout_app/repository/auth/auth_repository_impl.dart';
 import 'package:workout_app/textstyle.dart';
 import 'package:workout_app/validate.dart';
 import 'package:workout_app/view/signup_page.dart';
@@ -44,7 +45,7 @@ class LoginPage extends ConsumerWidget {
           child: SingleChildScrollView(
             reverse: true,
             child: Padding(
-              padding:  EdgeInsets.only(
+              padding: EdgeInsets.only(
                 left: 20,
                 right: 20,
                 bottom: bottomSpace,
@@ -163,20 +164,25 @@ class LoginPage extends ConsumerWidget {
                     /// メール&パスワード ログイン ///
                     InkWell(
                       onTap: () async {
-                        final service = AuthService();
+                        AuthRepositoryImpl authRepository =
+                        AuthRepositoryImpl();
                         try {
-                          await service.signInWithEmailAndPassword(
-                              emailController.text, passwordController.text);
+                          await authRepository.signIn(
+                              email: emailController.text,
+                              password: passwordController.text);
                           debugPrint("ユーザーがログインしました。");
                           debugPrint("email:${emailController.text}");
                           debugPrint("password:${passwordController.text}");
                           await Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const BottomNavigation()));
+                                  builder: (context) =>
+                                  const BottomNavigation()));
                         } on FirebaseAuthException catch (e) {
                           var message =
-                              FirebaseAuthErrorExt.fromCode(e.code).message;
+                              FirebaseAuthErrorExt
+                                  .fromCode(e.code)
+                                  .message;
                           _showErrorDialog(context, message);
                         }
                       },

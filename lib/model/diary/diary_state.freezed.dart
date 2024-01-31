@@ -71,9 +71,10 @@ class _$DiaryCopyWithImpl<$Res, $Val extends Diary>
 }
 
 /// @nodoc
-abstract class _$$_DiaryCopyWith<$Res> implements $DiaryCopyWith<$Res> {
-  factory _$$_DiaryCopyWith(_$_Diary value, $Res Function(_$_Diary) then) =
-      __$$_DiaryCopyWithImpl<$Res>;
+abstract class _$$DiaryImplCopyWith<$Res> implements $DiaryCopyWith<$Res> {
+  factory _$$DiaryImplCopyWith(
+          _$DiaryImpl value, $Res Function(_$DiaryImpl) then) =
+      __$$DiaryImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -82,9 +83,11 @@ abstract class _$$_DiaryCopyWith<$Res> implements $DiaryCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_DiaryCopyWithImpl<$Res> extends _$DiaryCopyWithImpl<$Res, _$_Diary>
-    implements _$$_DiaryCopyWith<$Res> {
-  __$$_DiaryCopyWithImpl(_$_Diary _value, $Res Function(_$_Diary) _then)
+class __$$DiaryImplCopyWithImpl<$Res>
+    extends _$DiaryCopyWithImpl<$Res, _$DiaryImpl>
+    implements _$$DiaryImplCopyWith<$Res> {
+  __$$DiaryImplCopyWithImpl(
+      _$DiaryImpl _value, $Res Function(_$DiaryImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -93,7 +96,7 @@ class __$$_DiaryCopyWithImpl<$Res> extends _$DiaryCopyWithImpl<$Res, _$_Diary>
     Object? chronicleContents = null,
     Object? createdAt = freezed,
   }) {
-    return _then(_$_Diary(
+    return _then(_$DiaryImpl(
       chronicleContents: null == chronicleContents
           ? _value.chronicleContents
           : chronicleContents // ignore: cast_nullable_to_non_nullable
@@ -108,14 +111,14 @@ class __$$_DiaryCopyWithImpl<$Res> extends _$DiaryCopyWithImpl<$Res, _$_Diary>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Diary extends _Diary {
-  const _$_Diary(
+class _$DiaryImpl extends _Diary {
+  const _$DiaryImpl(
       {@JsonKey(name: 'chronicleContents') required this.chronicleContents,
       @JsonKey(name: 'createdAt') @DateTimeConverter() required this.createdAt})
       : super._();
 
-  factory _$_Diary.fromJson(Map<String, dynamic> json) =>
-      _$$_DiaryFromJson(json);
+  factory _$DiaryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$DiaryImplFromJson(json);
 
   @override
   @JsonKey(name: 'chronicleContents')
@@ -131,10 +134,10 @@ class _$_Diary extends _Diary {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Diary &&
+            other is _$DiaryImpl &&
             (identical(other.chronicleContents, chronicleContents) ||
                 other.chronicleContents == chronicleContents) &&
             (identical(other.createdAt, createdAt) ||
@@ -148,12 +151,12 @@ class _$_Diary extends _Diary {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_DiaryCopyWith<_$_Diary> get copyWith =>
-      __$$_DiaryCopyWithImpl<_$_Diary>(this, _$identity);
+  _$$DiaryImplCopyWith<_$DiaryImpl> get copyWith =>
+      __$$DiaryImplCopyWithImpl<_$DiaryImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_DiaryToJson(
+    return _$$DiaryImplToJson(
       this,
     );
   }
@@ -165,10 +168,10 @@ abstract class _Diary extends Diary {
       required final String chronicleContents,
       @JsonKey(name: 'createdAt')
       @DateTimeConverter()
-      required final DateTime? createdAt}) = _$_Diary;
+      required final DateTime? createdAt}) = _$DiaryImpl;
   const _Diary._() : super._();
 
-  factory _Diary.fromJson(Map<String, dynamic> json) = _$_Diary.fromJson;
+  factory _Diary.fromJson(Map<String, dynamic> json) = _$DiaryImpl.fromJson;
 
   @override
   @JsonKey(name: 'chronicleContents')
@@ -179,6 +182,6 @@ abstract class _Diary extends Diary {
   DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
-  _$$_DiaryCopyWith<_$_Diary> get copyWith =>
+  _$$DiaryImplCopyWith<_$DiaryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -11,11 +11,11 @@ class MemoRepositoryImpl implements MemoRepository {
   @override
   Future<void> createMemo({required Memo memo}) async {
     final uid = currentUser!.uid;
-    FirebaseFirestore.instance
+    await FirebaseFirestore.instance
         .collection('users')
         .doc(uid)
-        .collection('memos')
-        .add(Memo(
+        .collection('memos').doc()
+        .set(Memo(
                 id: memo.id,
                 title: memo.title,
                 part: memo.part,
@@ -23,9 +23,19 @@ class MemoRepositoryImpl implements MemoRepository {
             .toJson());
   }
 
+  @override
+  Future<void> deleteMemo({required Memo memo}) async {
+    final uid = currentUser!.uid;
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('memos')
+        .doc(memo.id).delete();
+  }
+
   // @override
-  // Future<void> deleteMemo({required Memo memo}) async{
+  // Future<void> fetchMemo({}){
   //   final uid = currentUser!.uid;
-  //   FirebaseFirestore.instance.collection('users').doc(uid).collection('memos').doc()
+  //   FirebaseFirestore.instance.collection('users').doc(uid).collection('memos').get().
   // }
 }
