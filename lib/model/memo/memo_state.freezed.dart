@@ -78,18 +78,20 @@ class _$MemoCopyWithImpl<$Res, $Val extends Memo>
 }
 
 /// @nodoc
-abstract class _$$_MemoCopyWith<$Res> implements $MemoCopyWith<$Res> {
-  factory _$$_MemoCopyWith(_$_Memo value, $Res Function(_$_Memo) then) =
-      __$$_MemoCopyWithImpl<$Res>;
+abstract class _$$MemoImplCopyWith<$Res> implements $MemoCopyWith<$Res> {
+  factory _$$MemoImplCopyWith(
+          _$MemoImpl value, $Res Function(_$MemoImpl) then) =
+      __$$MemoImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({String id, String title, String part, String type});
 }
 
 /// @nodoc
-class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res, _$_Memo>
-    implements _$$_MemoCopyWith<$Res> {
-  __$$_MemoCopyWithImpl(_$_Memo _value, $Res Function(_$_Memo) _then)
+class __$$MemoImplCopyWithImpl<$Res>
+    extends _$MemoCopyWithImpl<$Res, _$MemoImpl>
+    implements _$$MemoImplCopyWith<$Res> {
+  __$$MemoImplCopyWithImpl(_$MemoImpl _value, $Res Function(_$MemoImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -100,7 +102,7 @@ class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res, _$_Memo>
     Object? part = null,
     Object? type = null,
   }) {
-    return _then(_$_Memo(
+    return _then(_$MemoImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -123,14 +125,15 @@ class __$$_MemoCopyWithImpl<$Res> extends _$MemoCopyWithImpl<$Res, _$_Memo>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Memo implements _Memo {
-  const _$_Memo(
+class _$MemoImpl implements _Memo {
+  const _$MemoImpl(
       {required this.id,
       required this.title,
       required this.part,
       required this.type});
 
-  factory _$_Memo.fromJson(Map<String, dynamic> json) => _$$_MemoFromJson(json);
+  factory _$MemoImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MemoImplFromJson(json);
 
   @override
   final String id;
@@ -147,10 +150,10 @@ class _$_Memo implements _Memo {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Memo &&
+            other is _$MemoImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.part, part) || other.part == part) &&
@@ -164,12 +167,12 @@ class _$_Memo implements _Memo {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MemoCopyWith<_$_Memo> get copyWith =>
-      __$$_MemoCopyWithImpl<_$_Memo>(this, _$identity);
+  _$$MemoImplCopyWith<_$MemoImpl> get copyWith =>
+      __$$MemoImplCopyWithImpl<_$MemoImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MemoToJson(
+    return _$$MemoImplToJson(
       this,
     );
   }
@@ -180,9 +183,9 @@ abstract class _Memo implements Memo {
       {required final String id,
       required final String title,
       required final String part,
-      required final String type}) = _$_Memo;
+      required final String type}) = _$MemoImpl;
 
-  factory _Memo.fromJson(Map<String, dynamic> json) = _$_Memo.fromJson;
+  factory _Memo.fromJson(Map<String, dynamic> json) = _$MemoImpl.fromJson;
 
   @override
   String get id;
@@ -194,5 +197,6 @@ abstract class _Memo implements Memo {
   String get type;
   @override
   @JsonKey(ignore: true)
-  _$$_MemoCopyWith<_$_Memo> get copyWith => throw _privateConstructorUsedError;
+  _$$MemoImplCopyWith<_$MemoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }

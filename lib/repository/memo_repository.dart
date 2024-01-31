@@ -6,5 +6,9 @@ abstract class MemoRepository {
     required Memo memo,
   });
 
+  Future<void> deleteMemo({
+    required Memo memo,
+});
+
 
 }
