@@ -30,12 +30,9 @@ class Memos extends _$Memos {
     MemoRepositoryImpl().createMemo(memo: memo);
   }
   void removeMemo(String memoId){
-    print(state);
     state.removeWhere((memo) => memo.id == memoId);
-    print(state);
   }
 }
-// @riverpod
 @Riverpod(keepAlive: true)
 class TrainingNameController extends _$TrainingNameController {
   @override

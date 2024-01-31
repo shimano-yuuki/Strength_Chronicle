@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:workout_app/app.dart';
 import 'package:workout_app/model/memo/memo_state.dart';
+import 'package:workout_app/repository/auth/auth_repository_impl.dart';
 import 'package:workout_app/textstyle.dart';
 import 'package:workout_app/view/widget/bottom_sheet.dart';
 import 'package:workout_app/view/widget/custom_alert_dialog.dart';
@@ -108,13 +109,13 @@ class MemoPage extends ConsumerWidget {
         appBar: appBar,
         body: TabBarView(
           children: [
-            TabViewWidget(),
-            TabViewWidget(part: '胸'),
-            TabViewWidget(part: '背中'),
-            TabViewWidget(part: '腕'),
-            TabViewWidget(part: '肩'),
-            TabViewWidget(part: '脚'),
-            TabViewWidget(part: '腹'),
+            CommonTabViewWidget(),
+            CommonTabViewWidget(part: '胸'),
+            CommonTabViewWidget(part: '背中'),
+            CommonTabViewWidget(part: '腕'),
+            CommonTabViewWidget(part: '肩'),
+            CommonTabViewWidget(part: '脚'),
+            CommonTabViewWidget(part: '腹'),
           ],
         ),
         floatingActionButton: floatingActionButton,

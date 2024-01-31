@@ -4,11 +4,10 @@ import 'package:workout_app/model/memo/memo_state.dart';
 import 'package:workout_app/view/widget/memo_card.dart';
 import 'package:workout_app/view_model/memo_notifier.dart';
 
-class TabViewWidget extends ConsumerWidget {
-  const TabViewWidget({Key? key, this.part}) : super(key: key);
+class CommonTabViewWidget extends ConsumerWidget {
+  const CommonTabViewWidget({Key? key, this.part}) : super(key: key);
 
   final String? part;
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     List<Memo> memos = ref.watch(memosProvider);

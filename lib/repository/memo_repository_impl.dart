@@ -14,7 +14,8 @@ class MemoRepositoryImpl implements MemoRepository {
     await FirebaseFirestore.instance
         .collection('users')
         .doc(uid)
-        .collection('memos').doc()
+        .collection('memos')
+        .doc()
         .set(Memo(
                 id: memo.id,
                 title: memo.title,
@@ -30,12 +31,25 @@ class MemoRepositoryImpl implements MemoRepository {
         .collection('users')
         .doc(uid)
         .collection('memos')
-        .doc(memo.id).delete();
+        .doc(memo.id)
+        .delete();
   }
 
-  // @override
-  // Future<void> fetchMemo({}){
-  //   final uid = currentUser!.uid;
-  //   FirebaseFirestore.instance.collection('users').doc(uid).collection('memos').get().
-  // }
+  @override
+  Future<List<Memo>> fetchMemo() async {
+    final uid = currentUser!.uid;
+
+    final memosSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .collection('memos')
+        .get();
+
+    final list = <Memo>[];
+    for (final document in memosSnapshot.docs) {
+      final data = Memo.fromJson(document.data());
+      list.add(data);
+    }
+    return list;
+  }
 }
