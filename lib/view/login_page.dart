@@ -5,11 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:workout_app/model/auth/firebase_auth.dart';
 import 'package:workout_app/model/auth/firebase_auth_error.dart';
 import 'package:workout_app/repository/auth/auth_repository_impl.dart';
+import 'package:workout_app/repository/memo_repository_impl.dart';
 import 'package:workout_app/textstyle.dart';
 import 'package:workout_app/validate.dart';
 import 'package:workout_app/view/signup_page.dart';
 import 'package:workout_app/view/widget/custom_alert_dialog.dart';
 import 'package:workout_app/view/widget/text_form.dart';
+import 'package:workout_app/view_model/memo_notifier.dart';
 
 import '../app.dart';
 
@@ -72,7 +74,7 @@ class LoginPage extends ConsumerWidget {
                               final service = AuthService();
                               await service.signInWithGoogle(context);
                             },
-                            child: const LoginIconWidget(
+                            child:  const LoginIconWidget(
                               logoId: 'assets/images/google-logo.svg',
                             ),
                           ),
@@ -173,6 +175,8 @@ class LoginPage extends ConsumerWidget {
                           debugPrint("ユーザーがログインしました。");
                           debugPrint("email:${emailController.text}");
                           debugPrint("password:${passwordController.text}");
+                          ref.read(memosProvider.notifier).state = await MemoRepositoryImpl().fetchMemo();
+                          print(ref.read(memosProvider));
                           await Navigator.push(
                               context,
                               MaterialPageRoute(
